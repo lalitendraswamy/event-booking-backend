@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AppService } from 'src/app.service';
+import { AppService } from 'src/modules/app/app.service';
 import axios  from 'axios'
 
 @Injectable()
