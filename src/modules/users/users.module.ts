@@ -8,6 +8,7 @@ import { UserDao } from 'src/database/mssql/dao/user.dao';
   imports:[
     DatabaseModule,
   ],
+  
 
   providers: [UsersService],
   controllers: [UsersController],
