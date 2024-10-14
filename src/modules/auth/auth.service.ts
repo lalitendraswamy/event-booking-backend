@@ -2,9 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { AppService } from 'src/modules/app/app.service';
 import axios  from 'axios'
 
+import { UsersService } from '../users/users.service';
+import { JwtAuthService } from './jwtAuth.service';
+
 @Injectable()
 export class AuthService {
-  constructor(private readonly appService:AppService) {
+  constructor(
+    private readonly appService:AppService,
+    private readonly jwtService: JwtAuthService,
+    private readonly userService: UsersService
+  ) {
   }
 
   async getAuthUrl(): Promise<string> {
@@ -55,7 +62,19 @@ export class AuthService {
             token:tokenResponse.data,
             userDetails:userDetails
         }
-        return tokenAndData
+
+        let user = await this.userService.findUserByEmail(userDetails.mail)
+          console.log("User", user.dataValues)
+        let customToken = await this.jwtService.generateJwt(user.dataValues)
+        
+        console.log("Custom token", customToken)
+
+        // let customPayload = await this.jwtService.verifyToken(customToken);
+        
+        // console.log("Custom Payload", customPayload)
+
+
+        return {token:customToken,username: user.username,profileImage:user.userImageUrl}
     } catch (error) {
         return error
     }
