@@ -1,4 +1,4 @@
-import { Column, Model, Table, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, HasMany, BelongsToMany, AllowNull } from 'sequelize-typescript';
 import { Review } from './reviews.model';
 import { TicketBooking } from './ticketBookings.model';
 import { Wishlist } from './wishlist.model';
@@ -60,6 +60,18 @@ export class Event extends Model<Event> {
   averageRating: number;
 
   @Column({
+    type:DataType.STRING,
+    allowNull:false
+  })
+  organizerName: string;
+
+  @Column({
+    type:DataType.STRING,
+    allowNull:false
+  })
+  organizerImage: string
+
+  @Column({
     type: DataType.STRING,
     allowNull: true,
   })
@@ -70,6 +82,8 @@ export class Event extends Model<Event> {
     allowNull: false,
   })
   ticketPrice: number;
+
+
 
   @HasMany(() => Review)
   reviews: Review[];

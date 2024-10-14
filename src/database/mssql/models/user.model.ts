@@ -4,6 +4,7 @@ import { TicketBooking } from './ticketBookings.model';
 import { Event } from './events.model';
 import { Wishlist } from './wishlist.model';
 import { v4 as uuidv4 } from 'uuid';
+import { Role } from 'src/core/enums/roles.enum';
 
 @Table({
   tableName: 'users',
@@ -24,6 +25,12 @@ export class User extends Model<User> {
   })
   username: string;
 
+  @Column({
+    type:DataType.STRING,
+    allowNull:true
+  })
+  userImageUrl:string;
+
 
 
   @Column({
@@ -34,11 +41,12 @@ export class User extends Model<User> {
   email: string;
 
   @Column({
-    type: DataType.ENUM('admin', 'user'),
+    type: DataType.ENUM(...Object.values(Role)),
     allowNull: false,
-    defaultValue: "user"
+    // enum: Role,
+    defaultValue: Role.user
   })
-  role: 'admin' | 'user';
+  role: Role;
 
   @HasMany(() => Review)
   reviews: Review[];

@@ -1,39 +1,47 @@
 GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 ###
 
 POST http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTEzOTcsImV4cCI6MTcyODkxNDk5N30.YSnvOoD-Tyhmx6VRMEJt1oMaUd1wSJCUr_onyMGkcYk
 Content-Type: application/json
 
 {
-    "username":"Benny",
-    "email":"benny@email.com"
+    "username":"Shiva",
+    "email":"shiva.krishna@g7cr.com",
+    "role":"user"
 
 }
 
 ### Get User By UUID
 
 GET http://localhost:5000/users/40d01863-cb56-426a-8886-d9e7518a6aa1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 
 ### Get User By Username
-GET http://localhost:5000/users/username/Benny
+GET http://localhost:5000/users/username/Prasad
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
+
 
 
 ### Get User By Email
 GET http://localhost:5000/users/email/benny@email.com
 
 
+
 ### Update User By UUID
-PUT  http://localhost:5000/users/update/40d01863-cb56-426a-8886-d9e7518a6aa1
+PUT  http://localhost:5000/users/update/c484a2ab-e923-423c-8c7a-5de85dc85193
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 Content-Type: application/json
 
 {
-    "username":"BandariShiva",
-    "email":"krishnaaa@email.com",
-    "role":"user"
+    
+    "role":"admin"
 
 }
 
 ### Delete User By Id
 DELETE  http://localhost:5000/users/remove/40d01863-cb56-426a-8886-d9e7518a6aa1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
