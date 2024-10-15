@@ -8,8 +8,14 @@ export class UserDao  {
   constructor(@InjectModel(User) private readonly userModel: typeof User) {}
 
   async createUser(username: string, email: string,role?:Role): Promise<User> {
-
     return await this.userModel.create({ username, email ,role});
+  }
+
+  async insertMultipleUsers(usersData:Partial<User>[]){
+    return await this.userModel.bulkCreate(usersData, {
+      validate: true, // Ensures that validation is run on each item
+      individualHooks: true, 
+    })
   }
 
   async findAll(): Promise<User[]> {

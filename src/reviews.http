@@ -1,0 +1,34 @@
+GET http://localhost:5000/reviews
+
+
+
+### Add One Review
+POST http://localhost:5000/reviews
+Content-Type: application/json
+
+{
+    "userId": "c484a2ab-e923-423c-8c7a-5de85dc85193",
+    "eventId" :"711ca23a-fac7-4928-ab26-e3e828cf212f",
+     "review": "The event was fantastic! Great lineup and atmosphere.",
+    "userRating": "4.8"
+}
+
+
+### Add Multiple Reviews
+POST http://localhost:5000/reviews/multiple 
+Content-Type: application/json
+
+[
+  {
+    "review": "Powerful Performance",
+    "userRating": "4.4",
+    "eventId": "711ca23a-fac7-4928-ab26-e3e828cf212f",
+    "userId": "0f352398-2574-4f39-a8a9-919430024ec3" 
+  },
+  {
+    "review": "Great Experience",
+    "userRating": "4.7",
+    "eventId": "711ca23a-fac7-4928-ab26-e3e828cf212f", 
+    "userId": "597b0b90-b265-495c-90a4-085f7cd6f278" 
+  }
+]

@@ -1,0 +1,38 @@
+
+GET http://localhost:5000/events
+
+
+###
+
+POST http://localhost:5000/events/multiple
+Content-Type: application/json
+
+[
+  {
+    "eventName": "Music Festival 2024",
+    "description": "An amazing music festival featuring top artists.",
+    "eventDateTime": "2024-12-15T18:00:00",
+    "duration": "180", 
+    "totalTickets": "500",
+    "location": "Los Angeles, CA",
+    "averageRating": "4.5",
+    "organizerName": "XYZ Events",
+    "organizerImage": "https://example.com/images/xyz_events.jpg",
+    "imageUrl": "https://example.com/images/music_festival.jpg",
+    "ticketPrice": "75"
+  },
+  {
+    "eventName": "Tech Conference 2024",
+    "description": "Join us for an insightful tech conference with industry leaders.",
+    "eventDateTime": "2024-11-20T09:00:00",
+    "duration": "360",
+    "totalTickets": "300",
+    "location": "San Francisco, CA",
+    "averageRating": "4.7",
+    "organizerName": "TechWorld",
+    "organizerImage": "https://example.com/images/techworld.jpg",
+    "imageUrl": "https://example.com/images/tech_conference.jpg",
+    "ticketPrice": "150"
+  }
+]
+
