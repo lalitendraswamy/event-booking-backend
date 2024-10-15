@@ -11,6 +11,13 @@ export class EventsDao{
         return await this.eventsModel.findAll();
     }
 
+    async insertMultipleEvents(eventsData:Partial<Event>[]){
+        return await this.eventsModel.bulkCreate(eventsData,{
+            validate:true,
+            individualHooks:true
+        });
+    }
+
     async getEventByEventId(id:string){
         return await this.eventsModel.findByPk(id);
     }

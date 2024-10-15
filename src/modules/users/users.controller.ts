@@ -17,8 +17,13 @@ export class UsersController {
         return this.userService.createUser(body.username, body.email,body.role);
     }
 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    @Post("multiple")
+    async insertMultipleUsers(@Body() body: Partial<User>[]){
+        return await this.userService.insertMultipleUsers(body)
+    }
+
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Get()
     async findAll(){
         return this.userService.findAllUsers()

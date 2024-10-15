@@ -11,6 +11,10 @@ export class UsersService {
     async createUser(username: string, email: string,role?:Role): Promise<User> {
         return await this.userDao.createUser(username, email,role);
     }
+    
+    async insertMultipleUsers(usersData:Partial<User>[]){
+        return await this.userDao.insertMultipleUsers(usersData);
+    }
 
     async findAllUsers(): Promise<User[]> {
         return await this.userDao.findAll();
