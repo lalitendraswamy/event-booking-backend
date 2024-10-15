@@ -13,7 +13,7 @@ export class RoleGuard implements CanActivate {
     }
  
     const request = context.switchToHttp().getRequest();
-    const user = request.user; // User is attached to the request by JwtAuthGuard
+    const user = request.user;
  
     if (!user || !user.role) {
       throw new ForbiddenException('You do not have permission to access this resource');
@@ -23,7 +23,7 @@ export class RoleGuard implements CanActivate {
       throw new ForbiddenException('You do not have permission to access this resource');
     }
  
-    return true; // User has the required role
+    return true; 
   }
 }
  

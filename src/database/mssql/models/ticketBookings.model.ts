@@ -2,6 +2,7 @@ import { Column, Model, Table, DataType, ForeignKey, BelongsTo } from 'sequelize
 import { Event } from './events.model';
 import { User } from './user.model';
 import { v4 as uuidv4 } from 'uuid';
+import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
 
 @Table({
   tableName: 'ticket_bookings',
@@ -28,10 +29,10 @@ export class TicketBooking extends Model<TicketBooking> {
   ticketPrice: number;
 
   @Column({
-    type: DataType.ENUM('booked', 'failed'),
+    type: DataType.ENUM(...Object.values(bookingStatus)),
     allowNull: false,
   })
-  status: 'booked' | 'failed';
+  status: bookingStatus.booked;
 
   @ForeignKey(() => Event)
   @Column({
