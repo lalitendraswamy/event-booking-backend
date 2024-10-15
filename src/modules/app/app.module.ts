@@ -7,6 +7,7 @@ import { UsersModule } from '../users/users.module';
 import { DatabaseModule } from '../../database/database.module';
 import { EventsModule } from '../events/events.module';
 import { ReviewsModule } from '../reviews/reviews.module';
+import { EmailModule } from '../emailService/email.module';
 
 
 
@@ -20,7 +21,8 @@ import { ReviewsModule } from '../reviews/reviews.module';
     AuthModule,
     UsersModule,
     EventsModule,
-    ReviewsModule
+    ReviewsModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -30,9 +30,10 @@ Content-Type: application/json
     "location": "San Francisco, CA",
     "averageRating": "4.7",
     "organizerName": "TechWorld",
-    "organizerImage": "https://example.com/images/techworld.jpg",
+    "organizerImage": "https://example.com/images/techworld.jpg", 
     "imageUrl": "https://example.com/images/tech_conference.jpg",
     "ticketPrice": "150"
   }
+  
 ]
 

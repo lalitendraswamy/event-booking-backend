@@ -10,8 +10,8 @@ import { Roles } from '../auth/role.decorator';
 export class UsersController {
     constructor(private readonly userService:UsersService){}
 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Post()
     async create(@Body() body: { username: string; email: string, role?:Role }) {
         return this.userService.createUser(body.username, body.email,body.role);
@@ -57,8 +57,8 @@ export class UsersController {
     }
 
 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteUserById(@Param("id") id:string){
         return await this.userService.deleteUserById(id);
