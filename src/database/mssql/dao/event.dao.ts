@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Event } from "../models/events.model";
+import { Review } from "../models/reviews.model";
+import { User } from "../models/user.model";
 
 @Injectable()
 export class EventsDao{
@@ -8,7 +10,18 @@ export class EventsDao{
 
 
     async getAllEvents(){
-        return await this.eventsModel.findAll();
+        return await this.eventsModel.findAll({include:[{
+            model:Review,
+            attributes:["review","userRating"],
+            include:[
+                {
+                    model:User,
+                    attributes:["username"]
+                }
+            ]
+        }
+        
+    ]});
     }
 
     async insertMultipleEvents(eventsData:Partial<Event>[]){

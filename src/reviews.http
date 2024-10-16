@@ -7,8 +7,8 @@ POST http://localhost:5000/reviews
 Content-Type: application/json
 
 {
-    "userId": "c484a2ab-e923-423c-8c7a-5de85dc85193",
-    "eventId" :"711ca23a-fac7-4928-ab26-e3e828cf212f",
+    "userId": "10fc5fd9-1c45-48e2-aa01-b9c8017253a1",
+    "eventId" :"0cd4a97e-7cd5-426d-8783-3a98ff5f0d6b",
      "review": "The event was fantastic! Great lineup and atmosphere.",
     "userRating": "4.8"
 }
