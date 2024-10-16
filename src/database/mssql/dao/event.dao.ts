@@ -10,7 +10,9 @@ export class EventsDao{
 
 
     async getAllEvents(){
-        return await this.eventsModel.findAll({include:[{
+        return await this.eventsModel.findAll({
+            include:[
+                {
             model:Review,
             attributes:["review","userRating"],
             include:[
@@ -20,8 +22,12 @@ export class EventsDao{
                 }
             ]
         }
-        
-    ]});
+    ],
+    attributes:{
+        exclude:["createdAt", "updatedAt"]
+    }
+    }
+    );
     }
 
     async insertMultipleEvents(eventsData:Partial<Event>[]){
@@ -29,6 +35,10 @@ export class EventsDao{
             validate:true,
             individualHooks:true
         });
+    }
+
+    async addEvent(event:Partial<Event>){
+        return await this.eventsModel.create(event)
     }
 
     async getEventByEventId(id:string){

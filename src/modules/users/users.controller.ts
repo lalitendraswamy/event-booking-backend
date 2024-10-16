@@ -19,7 +19,7 @@ export class UsersController {
     // @Roles(Role.admin)
     @Post()
     async create(@Body() body: { username: string; email: string, role?:Role }) {
-        return this.userService.createUser(body.username, body.email,body.role);
+        return this.userService.createUser(body);
     }
 
     @Post("multiple")
@@ -27,8 +27,8 @@ export class UsersController {
         return await this.userService.insertMultipleUsers(body)
     }
 
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()
     async findAll(){

@@ -12,6 +12,10 @@ export class EventsService {
         return await this.eventsDao.getAllEvents();
     }
 
+    async addEvent(event:Partial<Event>){
+        return await this.eventsDao.addEvent(event);
+    }
+
     async insertMultipleEvents(eventsData: Partial<Event>[]){
         return await this.eventsDao.insertMultipleEvents(eventsData);
     }
