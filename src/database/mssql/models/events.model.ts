@@ -26,6 +26,13 @@ export class Event extends Model<Event> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    defaultValue:undefined
+  })
+  category: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
   })
   description: string;
 
@@ -85,10 +92,18 @@ export class Event extends Model<Event> {
 
 
 
-  @HasMany(() => Review)
+  @HasMany(() => Review,
+  {
+    onDelete:'CASCADE',
+    hooks:true
+  })
   reviews: Review[];
 
-  @HasMany(() => TicketBooking)
+  @HasMany(() => TicketBooking,
+  {
+    onDelete:'CASCADE',
+    hooks:true
+  })
   bookings: TicketBooking[];
 
   @BelongsToMany(() => User, () => Wishlist) // Establish many-to-many relation
