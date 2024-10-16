@@ -20,5 +20,9 @@ export class EventsController {
         return await this.eventsService.insertMultipleEvents(body)
     }
     
+    @Post("add")
+    async addEvent(@Body() body :Partial<Event>){
+        return await this.eventsService.addEvent(body);
+    }
 
 }
