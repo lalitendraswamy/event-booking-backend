@@ -8,8 +8,8 @@ import { Role } from 'src/core/enums/roles.enum';
 export class UsersService {
     constructor(private readonly userDao:UserDao){}
 
-    async createUser(username: string, email: string,role?:Role): Promise<User> {
-        return await this.userDao.createUser(username, email,role);
+    async createUser(user): Promise<User> {
+        return await this.userDao.createUser(user);
     }
     
     async insertMultipleUsers(usersData:Partial<User>[]){

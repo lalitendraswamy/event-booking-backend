@@ -19,7 +19,7 @@ export class UsersController {
     // @Roles(Role.admin)
     @Post()
     async create(@Body() body: { username: string; email: string, role?:Role }) {
-        return this.userService.createUser(body.username, body.email,body.role);
+        return this.userService.createUser(body);
     }
 
     @Post("multiple")

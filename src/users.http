@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 
 ### Delete User By Id
-DELETE  http://localhost:5000/users/remove/34bc3436-e3cb-4bea-b657-2d5ca51859db
+DELETE  http://localhost:5000/users/remove/10fc5fd9-1c45-48e2-aa01-b9c8017253a1
 //Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 
@@ -60,6 +60,7 @@ Content-Type: application/json
     
 {
     "username":"Vamsi",
+    "userImageUrl": "teamwork.png",
     "email":"nagasai.vamsi@g7cr.com",
     "role":"user"
 
@@ -67,6 +68,7 @@ Content-Type: application/json
     
 {
     "username":"Tejaswini",
+    "userImageUrl": "botla.png",
     "email":"botla.tejaswini@g7cr.com",
     "role":"user"
 
@@ -74,6 +76,7 @@ Content-Type: application/json
     
 {
     "username":"Nagasritha",
+    "userImageUrl": "teamwork.png",
     "email":"nagasritha.er@g7cr.com",
     "role":"user"
 

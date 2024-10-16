@@ -8,10 +8,10 @@ import { EmailService } from 'src/modules/emailService/email.service';
 export class UserDao  {
   constructor(@InjectModel(User) private readonly userModel: typeof User,private readonly emailService: EmailService) {}
 
-  async createUser(username: string, email: string,role?:Role): Promise<User> {
+  async createUser(user): Promise<User> {
 
-    await this.emailService.sendInvitationEmail(email,"http://localhost:3000/login");
-    return await this.userModel.create({ username, email ,role});
+    await this.emailService.sendInvitationEmail(user.email,"http://localhost:3000/login");
+    return await this.userModel.create(user);
   }
 
   async insertMultipleUsers(usersData:Partial<User>[]){
@@ -22,7 +22,11 @@ export class UserDao  {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userModel.findAll();
+    return await this.userModel.findAll({
+      attributes:{
+        exclude:["createdAt", "updatedAt"]
+      }
+    });
   }
 
   async findUserById(id:string){
@@ -36,7 +40,10 @@ export class UserDao  {
   }
   async findUserByEmail(email:string):Promise<User>{
     return await this.userModel.findOne({
-                          where:{email:email}
+                          where:{email:email},
+                          attributes:{
+                            exclude: ["createdAt", "updatedAt"]
+                          }
                         })
   }
 
@@ -47,6 +54,7 @@ export class UserDao  {
       where: {userId:id}
     });
   }
+
 
   async deleteUserById(id:string){
     return await this.userModel.destroy({where:{userId:id}})
