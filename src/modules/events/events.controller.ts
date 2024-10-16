@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { Event } from 'src/database/mssql/models/events.model';
 import { ApiTags,ApiOperation,ApiResponse} from '@nestjs/swagger';
+import { handler } from '../utilis/tryCatchHandler';
 
 @ApiTags('events')
 @Controller('events')
@@ -13,6 +14,7 @@ export class EventsController {
     @Get()
     async getAllEvents(){
         return await this.eventsService.getAllEvents();
+        // return handler(req,res,this.eventsService.getAllEvents);
     }
 
     @Post("multiple")
