@@ -42,5 +42,24 @@ export class AppService {
 
   getDb_name():string{
     return this.configService.get<string>('db_name')
-  }  
+  }
+
+  getSmtp_host():string{
+    return this.configService.get<string>('smtp_host')
+  }
+
+  getSmtp_port():string{
+    return this.configService.get<string>('smtp_port')
+  }
+  
+  getSmtp_user():string{
+    return this.configService.get<string>('smtp_user')
+  }
+
+  getSmtp_pass():string{
+    return this.configService.get<string>('smtp_pass')
+  }
+
+
+
 }

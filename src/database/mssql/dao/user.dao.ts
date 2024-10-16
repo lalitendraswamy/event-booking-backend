@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from '../models/user.model'; 
 import { Role } from 'src/core/enums/roles.enum';
+import { EmailService } from 'src/modules/emailService/email.service';
 
 @Injectable()
 export class UserDao  {
-  constructor(@InjectModel(User) private readonly userModel: typeof User) {}
+  constructor(@InjectModel(User) private readonly userModel: typeof User,private readonly emailService: EmailService) {}
 
   async createUser(username: string, email: string,role?:Role): Promise<User> {
+
+    await this.emailService.sendInvitationEmail(email,"http://localhost:3000/login");
     return await this.userModel.create({ username, email ,role});
   }
 
