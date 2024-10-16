@@ -74,7 +74,7 @@ export class AuthService {
         // console.log("Custom Payload", customPayload)
 
 
-        return {token:customToken,username: user.username,profileImage:user.userImageUrl,role:user.role}
+        return {token:customToken,username: user.username,userImageUrl:user.userImageUrl,role:user.role}
     } catch (error) {
         return error
     }
