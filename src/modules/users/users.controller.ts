@@ -5,10 +5,15 @@ import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 import { Role } from 'src/core/enums/roles.enum';
 import { RoleGuard } from '../auth/role.guard';
 import { Roles } from '../auth/role.decorator';
+import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags("users")
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService:UsersService){}
+
+
+    
 
     // @UseGuards(JwtAuthGuard,RoleGuard)
     // @Roles(Role.admin)
@@ -24,6 +29,7 @@ export class UsersController {
 
     // @UseGuards(JwtAuthGuard,RoleGuard)
     // @Roles(Role.admin)
+    @ApiOperation({ summary: 'Get all users' })
     @Get()
     async findAll(){
         return this.userService.findAllUsers()
@@ -49,6 +55,7 @@ export class UsersController {
         return await this.userService.findUserByEmail(email);
     }
 
+    @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Put("update/:id")

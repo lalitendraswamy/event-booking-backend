@@ -48,12 +48,20 @@ export class User extends Model<User> {
   })
   role: Role;
 
-  @HasMany(() => Review)
+  @HasMany(() => Review,{
+    onDelete:'CASCADE',
+    hooks:true
+  })
   reviews: Review[];
 
-  @HasMany(() => TicketBooking)
+  @HasMany(() => TicketBooking,
+  {
+    onDelete:'CASCADE',
+    hooks:true
+  })
   bookings: TicketBooking[];
 
   @BelongsToMany(() => Event, () => Wishlist) // Establish many-to-many relation
   favoriteEvents: Event[]; // Alias for the wishlist events
 }
+

@@ -1,6 +1,8 @@
 GET http://localhost:5000/users
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
+###
 
+GET http://10.0.0.72:5000/users
 ###
 
 POST http://localhost:5000/users
@@ -11,6 +13,7 @@ Content-Type: application/json
     "username":"Prasanna",
     "email":"vijaya.lakshmi@g7cr.com",
     "role":"user"
+
 
 }
 
@@ -45,6 +48,7 @@ Content-Type: application/json
 ### Delete User By Id
 DELETE  http://localhost:5000/users/remove/34bc3436-e3cb-4bea-b657-2d5ca51859db
 //Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
+
 
 
 ###
