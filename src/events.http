@@ -39,3 +39,15 @@ Content-Type: application/json
   
 ]
 
+### Update Event by ID
+
+PUT http://localhost:5000/events/update/0cd4a97e-7cd5-426d-8783-3a98ff5f0d6b
+Content-Type: application/json
+
+{
+  "eventName": "Anirudh Ravichandran Concert"
+}
+
+
+### Delete Event By ID
+DELETE  http://localhost:5000/events/remove/0cd4a97e-7cd5-426d-8783-3a98ff5f0d6b
