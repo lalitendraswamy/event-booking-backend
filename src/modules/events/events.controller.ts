@@ -17,6 +17,11 @@ export class EventsController {
         // return handler(req,res,this.eventsService.getAllEvents);
     }
 
+    @Get("get/:id")
+    async getEventById(@Param('id') id:string){
+        return await this.eventsService.getEventById(id);
+    }
+
     @Post("multiple")
     async insertMultipleEvents(@Body() body:Partial<Event>[]){
         return await this.eventsService.insertMultipleEvents(body)
