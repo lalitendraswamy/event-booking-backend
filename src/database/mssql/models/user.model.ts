@@ -31,8 +31,6 @@ export class User extends Model<User> {
   })
   userImageUrl:string;
 
-
-
   @Column({
     type: DataType.STRING,
     allowNull: false,
