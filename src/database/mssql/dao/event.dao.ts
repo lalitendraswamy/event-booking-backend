@@ -45,4 +45,14 @@ export class EventsDao{
         return await this.eventsModel.findByPk(id);
     }
 
+    async updateEventById(id:string,eventData:Partial<Event>){
+        return await this.eventsModel.update(eventData,{
+            where:{eventId:id}
+        });
+    }
+
+    async deleteEventById(id:string){
+        return await this.eventsModel.destroy({where:{eventId:id}})
+    }
+
 }
