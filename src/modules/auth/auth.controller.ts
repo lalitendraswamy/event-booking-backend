@@ -7,7 +7,7 @@ export class AuthController {
 
   @Get()
   async getAuthUrl(){
-    return this.authService.getAuthUrl()
+    return await this.authService.getAuthUrl()
   }
 
   @Post('callback')

@@ -31,5 +31,3 @@ export const DatabaseConnection = SequelizeModule.forRootAsync({
     synchronize: true, // Turn off in production, use migrations instead
   }),
 });
-
-

@@ -8,7 +8,7 @@ import { DatabaseModule } from '../../database/database.module';
 import { EventsModule } from '../events/events.module';
 import { ReviewsModule } from '../reviews/reviews.module';
 import { EmailModule } from '../emailService/email.module';
-
+import { WishlistModule } from '../wishlist/wishlist.module';
 
 
 @Module({
@@ -20,6 +20,7 @@ import { EmailModule } from '../emailService/email.module';
     DatabaseModule,
     AuthModule,
     UsersModule,
+    WishlistModule,
     EventsModule,
     ReviewsModule,
     
