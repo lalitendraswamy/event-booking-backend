@@ -3,7 +3,6 @@ GET http://localhost:5000/events
 
 
 ###
-
 POST http://localhost:5000/events/multiple
 Content-Type: application/json
 
@@ -39,3 +38,21 @@ Content-Type: application/json
   
 ]
 
+###
+POST http://localhost:5000/events/add
+Content-Type: application/json
+
+  {
+  "eventName": "Dance Extravaganza",
+  "description": "A spectacular dance show featuring world-class performers and choreographers.",
+  "eventDateTime": "2024-11-10T19:00:00",
+  "category": "Dance",
+  "duration": "120",
+  "totalTickets": "300",
+  "location": "New York, NY",
+  "averageRating": "4.8",
+  "organizerName": "Dance Masters Inc.",
+  "organizerImage": "https://example.com/images/dance_masters.jpg",
+  "imageUrl": "https://example.com/images/dance_extravaganza.jpg",
+  "ticketPrice": "60"
+}

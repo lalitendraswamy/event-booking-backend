@@ -10,9 +10,10 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"Prasanna",
-    "email":"vijaya.lakshmi@g7cr.com",
-    "role":"user"
+    "username":"Benny",
+    "email":"john.benny@g7cr.com",
+    "userImageUrl":"https://res-console.cloudinary.com/dro9i7nvz/media_explorer_thumbnails/f3fc29cc72c09d81d221a1e519f5562d/detailed",
+    "role":"admin"
 
 
 }
@@ -30,7 +31,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0Y
 
 
 ### Get User By Email
-GET http://localhost:5000/users/email/benny@email.com
+GET http://localhost:5000/users/email/vijaya.lakshmi@g7cr.com
 
 
 
@@ -46,7 +47,7 @@ Content-Type: application/json
 }
 
 ### Delete User By Id
-DELETE  http://localhost:5000/users/remove/10fc5fd9-1c45-48e2-aa01-b9c8017253a1
+DELETE  http://localhost:5000/users/remove/8a16dabe-7467-4ca6-972e-b56aaaad0ced
 //Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 
