@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res } from '@nest
 import { EventsService } from './events.service';
 import { Event } from 'src/database/mssql/models/events.model';
 import { ApiTags,ApiOperation,ApiResponse} from '@nestjs/swagger';
-import { handler } from '../utilis/tryCatchHandler';
+
 
 @ApiTags('events')
 @Controller('events')
