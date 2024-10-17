@@ -29,13 +29,13 @@ export class WishListDao{
         });
     }
 
-    async insertWishListData(wishListData:Partial<Wishlist>[]){
-        return await this.wishlistModel.bulkCreate(wishListData,{
-            validate:true,
-            individualHooks:true
-        }
+    // async insertWishListData(wishListData:Partial<Wishlist>[]){
+    //     return await this.wishlistModel.bulkCreate(wishListData,{
+    //         validate:true,
+    //         individualHooks:true
+    //     }
 
-    )}
+    // )}
 
     async deleteWishListItem(id:string){
         return await this.wishlistModel.destroy({where:{eventId:id}})

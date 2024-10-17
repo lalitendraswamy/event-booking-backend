@@ -10,9 +10,9 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"Prasanna",
-    "email":"vijaya.lakshmi@g7cr.com",
-    "userImageUrl":"https://wallpapercave.com/wp/wp8455467.jpg",
+    "username":"Benny",
+    "email":"john.benny@g7cr.com",
+    "userImageUrl":"neneThopu.png",
     "role":"admin"
 
 

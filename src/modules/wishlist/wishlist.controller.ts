@@ -17,7 +17,7 @@ export class WishlistController {
       return await this.wishlistService.insertWishList(body);
     }
 
-    @Delete("/:id")
+    @Delete(":id")
     async deleteWishListdata(@Param('id') id:string){
       return await this.wishlistService.deleteWishList(id);
     }
