@@ -30,7 +30,7 @@ export class UsersController {
     // @UseGuards(JwtAuthGuard,RoleGuard)
     // @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
-    @Get()
+    @Get()  
     async findAll(){
         return this.userService.findAllUsers()
     }

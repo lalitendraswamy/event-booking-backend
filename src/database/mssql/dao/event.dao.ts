@@ -43,7 +43,35 @@ export class EventsDao{
     }
 
     async getEventByEventId(id:string){
-        return await this.eventsModel.findByPk(id);
+        return await this.eventsModel.findByPk(id,
+            {
+                include:[
+                    {
+                        model:Review,
+                        attributes:["review", "userRating"],
+                        include:[
+                            {
+                                model:User,
+                                attributes:["username"]
+                            }
+                        ]
+                    }
+                ],
+                attributes:{
+                    exclude:["updatedAt","createdAt"]
+                }            
+            }
+        );
+    }
+
+    async updateEventById(id:string,eventData:Partial<Event>){
+        return await this.eventsModel.update(eventData,{
+            where:{eventId:id}
+        });
+    }
+
+    async deleteEventById(id:string){
+        return await this.eventsModel.destroy({where:{eventId:id}})
     }
 
 }

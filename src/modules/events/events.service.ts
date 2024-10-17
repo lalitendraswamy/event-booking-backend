@@ -12,12 +12,24 @@ export class EventsService {
         return await this.eventsDao.getAllEvents();
     }
 
+    async getEventById(id:string){
+        return await this.eventsDao.getEventByEventId(id);
+    }
+
     async addEvent(event:Partial<Event>){
         return await this.eventsDao.addEvent(event);
     }
 
     async insertMultipleEvents(eventsData: Partial<Event>[]){
         return await this.eventsDao.insertMultipleEvents(eventsData);
+    }
+
+    async updateEventById(id:string, eventData:Partial<Event>){
+        return await this.eventsDao.updateEventById(id,eventData);
+    }
+
+    async deleteEventById(id:string){
+        return await this.eventsDao.deleteEventById(id);
     }
 
 }
