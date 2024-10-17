@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res } from '@nest
 import { EventsService } from './events.service';
 import { Event } from 'src/database/mssql/models/events.model';
 import { ApiTags,ApiOperation,ApiResponse} from '@nestjs/swagger';
-import { handler } from '../utilis/tryCatchHandler';
+
 
 @ApiTags('events')
 @Controller('events')
@@ -15,6 +15,11 @@ export class EventsController {
     async getAllEvents(){
         return await this.eventsService.getAllEvents();
         // return handler(req,res,this.eventsService.getAllEvents);
+    }
+
+    @Get("get/:id")
+    async getEventById(@Param('id') id:string){
+        return await this.eventsService.getEventById(id);
     }
 
     @Post("multiple")

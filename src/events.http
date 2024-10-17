@@ -1,6 +1,9 @@
 
 GET http://localhost:5000/events
 
+### Get Event By Id
+GET http://localhost:5000/events/get/892c2516-0b03-403d-8c4a-1e153d328e55
+
 
 ###
 
