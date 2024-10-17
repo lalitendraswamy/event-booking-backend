@@ -12,6 +12,10 @@ export class EventsService {
         return await this.eventsDao.getAllEvents();
     }
 
+    async getEventById(id:string){
+        return await this.eventsDao.getEventByEventId(id);
+    }
+
     async addEvent(event:Partial<Event>){
         return await this.eventsDao.addEvent(event);
     }
