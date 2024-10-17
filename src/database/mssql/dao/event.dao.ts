@@ -24,6 +24,7 @@ export class EventsDao{
                 }
             ]
         }
+        
     ],
     attributes:{
         exclude:["createdAt", "updatedAt"]

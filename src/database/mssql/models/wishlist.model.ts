@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from './user.model';
 import { Event } from './events.model';
 
@@ -11,7 +11,14 @@ export class Wishlist extends Model<Wishlist> {
   @Column
   userId: string; // References the user who added the event to their wishlist
 
+  
+  @BelongsTo(() => User)
+  user: User;
+
   @ForeignKey(() => Event)
   @Column
   eventId: string; // References the event added to the wishlist
+
+  @BelongsTo(() => Event)
+  event: Event;
 }
