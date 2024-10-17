@@ -19,7 +19,7 @@ Content-Type: application/json
     "averageRating": "4.5",
     "organizerName": "XYZ Events",
     "organizerImage": "https://example.com/images/xyz_events.jpg",
-    "imageUrl": "https://example.com/images/music_festival.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/baking-jokes-a-stand-up-comedy-open-mic-et00339526-2024-5-16-t-5-1-0.jpg",
     "ticketPrice": "75"
   },
   {
@@ -33,7 +33,7 @@ Content-Type: application/json
     "averageRating": "4.7",
     "organizerName": "TechWorld",
     "organizerImage": "https://example.com/images/techworld.jpg", 
-    "imageUrl": "https://example.com/images/tech_conference.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/tag-maadu-kannada-comedy-every-friday-et00411360-2024-9-10-t-6-37-23.jpg",
     "ticketPrice": "150"
   }
   
@@ -41,7 +41,7 @@ Content-Type: application/json
 
 ### Update Event by ID
 
-PUT http://localhost:5000/events/update/0cd4a97e-7cd5-426d-8783-3a98ff5f0d6b
+PUT http://localhost:5000/events/update/091e0ff9-5053-4f2b-9a24-f6e2f19a33e6
 Content-Type: application/json
 
 {
