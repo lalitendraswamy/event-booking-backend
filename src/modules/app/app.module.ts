@@ -9,6 +9,7 @@ import { EventsModule } from '../events/events.module';
 import { ReviewsModule } from '../reviews/reviews.module';
 import { EmailModule } from '../emailService/email.module';
 import { WishlistModule } from '../wishlist/wishlist.module';
+// import { MyLogger } from 'src/core/logger/logger.service';
 
 
 @Module({

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards, Logger } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/database/mssql/models/user.model';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
@@ -10,15 +10,17 @@ import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagg
 @ApiTags("users")
 @Controller('users')
 export class UsersController {
+    private readonly logger = new Logger(UsersController.name);
     constructor(private readonly userService:UsersService){}
 
 
     
 
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @Post()
     async create(@Body() body: { username: string; email: string, role?:Role }) {
+        this.logger.log("Handling Post request in User Controller")
         return this.userService.createUser(body);
     }
 
@@ -27,11 +29,12 @@ export class UsersController {
         return await this.userService.insertMultipleUsers(body)
     }
 
-    // @UseGuards(JwtAuthGuard,RoleGuard)
+    @UseGuards(JwtAuthGuard)
     // @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()  
     async findAll(){
+        this.logger.log("handle get request in Controller")
         return this.userService.findAllUsers()
     }
 
@@ -39,6 +42,7 @@ export class UsersController {
     @Roles(Role.admin)    
     @Get(":id")
     async findUserById(@Param("id") id:string){
+        this.logger.log("handle get User by Id request in Controller")
         return await this.userService.findUserById(id);
     }
 
@@ -60,14 +64,16 @@ export class UsersController {
     @Roles(Role.admin)
     @Put("update/:id")
     async updateUserById(@Param("id") id:string, @Body() body:Partial<User> ){
+        this.logger.log("handle Update user by Id request in Controller");
         return await this.userService.updateUserById(id,body)
     }
 
 
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteUserById(@Param("id") id:string){
+        this.logger.log("handle delete User By Id request in Controller");
         return await this.userService.deleteUserById(id);
     }
 

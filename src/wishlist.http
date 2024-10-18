@@ -6,9 +6,9 @@ POST http://localhost:5000/wishlist
 Content-Type: application/json
 
 {
-    "userId":"51c8ccba-7994-46cd-a9e9-03f097a268dc",
-    "eventId":"92ed98d8-f937-439e-a92f-7bf126bf0c82"
+    "userId":"ab821db8-0997-48f9-9f48-a9b9d4f28a7e",
+    "eventId":"2247de88-be4f-4f97-854f-52d0fd5c42fe"
 }
 
 ###
-DELETE  http://localhost:5000/wishlist/92ed98d8-f937-439e-a92f-7bf126bf0c82
+DELETE  http://localhost:5000/wishlist/2247de88-be4f-4f97-854f-52d0fd5c42fe
