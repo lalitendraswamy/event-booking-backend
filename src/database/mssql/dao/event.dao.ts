@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Event } from "../models/events.model";
 import { Review } from "../models/reviews.model";
@@ -7,6 +7,7 @@ import { handleSequelizeErrors } from "src/modules/utilis/tryCatchHandler";
 
 @Injectable()
 export class EventsDao{
+    private readonly logger = new Logger(EventsDao.name)
     constructor(@InjectModel(Event) private readonly eventsModel: typeof Event){}
 
 
@@ -34,6 +35,8 @@ export class EventsDao{
     if(!events){
         throw new HttpException("Events Not Found", HttpStatus.NOT_FOUND);
     }
+
+    this.logger.log("Getting All Events From Dao")
     return events;
 
 })
@@ -50,7 +53,9 @@ export class EventsDao{
 
     async addEvent(event:Partial<Event>){
         return handleSequelizeErrors(async () => {
-        return await this.eventsModel.create(event)
+        const response =  await this.eventsModel.create(event)
+        this.logger.log("Added a New Event from Dao");
+        return response
         })
     }
 
@@ -78,6 +83,7 @@ export class EventsDao{
         if(!event){
             throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
         }
+        this.logger.log("Got a Event by Id from Dao ")
 
         return event
     });
@@ -89,9 +95,11 @@ export class EventsDao{
             if(!response){
                 throw new HttpException("Event not Found to Update", HttpStatus.NOT_FOUND);
             }
-        return await this.eventsModel.update(eventData,{
+        const updatedEvent = await this.eventsModel.update(eventData,{
             where:{eventId:id}
         });
+        this.logger.log("Updated Event by Id in Dao");
+        return updatedEvent;
     })
     }
 
@@ -101,7 +109,9 @@ export class EventsDao{
             if(!response){
                 throw new HttpException("Event not Found to Delete", HttpStatus.NOT_FOUND);
             }
-        return await this.eventsModel.destroy({where:{eventId:id}})
+        const deletedEvent =  await this.eventsModel.destroy({where:{eventId:id}})
+            this.logger.log("Deleted Event By Id in Dao");
+        return deletedEvent
         })
     }
 
