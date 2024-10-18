@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from '../models/user.model';
 import { Role } from 'src/core/enums/roles.enum';
@@ -8,12 +8,15 @@ import { handleSequelizeErrors } from 'src/modules/utilis/tryCatchHandler';
 
 @Injectable()
 export class UserDao {
+  private readonly logger = new Logger(UserDao.name)
   constructor(@InjectModel(User) private readonly userModel: typeof User, private readonly emailService: EmailService) { }
 
   async createUser(user): Promise<User> {
     return handleSequelizeErrors(async () => {
       await this.emailService.sendInvitationEmail(user.email, "http://localhost:3000/login");
-      return await this.userModel.create(user);
+      const response =  await this.userModel.create(user);
+      this.logger.log("User Created in Dao")
+      return response
     });
   }
 
@@ -37,6 +40,7 @@ export class UserDao {
       if (!users) {
         throw new HttpException("Users Not Found", HttpStatus.NOT_FOUND);
       }
+      this.logger.log("Getting Users from Dao")
       return users;
     })
   }
@@ -45,8 +49,10 @@ export class UserDao {
     return handleSequelizeErrors(async () => {
       const user = await this.userModel.findByPk(id);
       if (!user) {
+        this.logger.error("User Not Found");
         throw new HttpException("User not Found", HttpStatus.NOT_FOUND);
       }
+      this.logger.log("Got User By Id")
       return user
     })
   }
@@ -83,9 +89,13 @@ export class UserDao {
         throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
       }
 
-      return await this.userModel.update(userData, {
+      const updatedUser =  await this.userModel.update(userData, {
         where: { userId: id }
       });
+
+      this.logger.log("Updated User by Id in Dao")
+      return updatedUser
+
     })
   }
 
@@ -97,7 +107,9 @@ export class UserDao {
         throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
       }
 
-      return await this.userModel.destroy({ where: { userId: id } })
+      const deletedUser = await this.userModel.destroy({ where: { userId: id } })
+      this.logger.log("Deleting a User by Id from Dao");
+      return deletedUser;
     })
   }
 

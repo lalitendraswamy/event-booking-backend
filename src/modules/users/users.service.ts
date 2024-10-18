@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { UserDao } from '../../database/mssql/dao/user.dao';
 import { User } from '../../database/mssql/models/user.model';
 import { Role } from 'src/core/enums/roles.enum';
@@ -7,10 +7,12 @@ import { handleSequelizeErrors } from '../utilis/tryCatchHandler';
 
 @Injectable()
 export class UsersService {
+    private readonly logger = new Logger(UsersService.name)
     constructor(private readonly userDao: UserDao) { }
 
     async createUser(user): Promise<User> {
         return handleSequelizeErrors(async () => {
+            this.logger.log("Creating a User from Service");
             return await this.userDao.createUser(user);
         })
     }
@@ -23,12 +25,14 @@ export class UsersService {
 
     async findAllUsers(): Promise<User[]> {
         return handleSequelizeErrors(async () => {
+            this.logger.log("Handling get all users in service")
             return await this.userDao.findAll();
         })
     }
 
     async findUserById(id: string) {
         return handleSequelizeErrors(async () => {
+            this.logger.log("Getting a User by Id from service")
             return await this.userDao.findUserById(id);
         })
     }
@@ -49,12 +53,14 @@ export class UsersService {
 
     async updateUserById(id: string, userData: Partial<User>) {
         return handleSequelizeErrors(async () => {
+            this.logger.log("Updating a User By Id from Service");
             return await this.userDao.updateUserById(id, userData);
         })
     }
 
     async deleteUserById(id: string) {
         return handleSequelizeErrors(async () => {
+            this.logger.log("Deleting a User by Id  from Service");
             return await this.userDao.deleteUserById(id);
         })
     }
