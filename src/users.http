@@ -1,5 +1,5 @@
 GET http://localhost:5000/users
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MWM4Y2NiYS03OTk0LTQ2Y2QtYTllOS0wM2YwOTdhMjY4ZGMiLCJ1c2VybmFtZSI6IlByYXNhbm5hIiwidXNlckltYWdlVXJsIjoiaHR0cHM6Ly93YWxscGFwZXJjYXZlLmNvbS93cC93cDg0NTU0NjcuanBnIiwiZW1haWwiOiJ2aWpheWEubGFrc2htaUBnN2NyLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyOTI0Mzc1NywiZXhwIjoxNzI5MjQ3MzU3fQ.aJNwY9OODIMwO3mVD7T3pezjOOZNFGfXmc8y1yRhOJI
 ###
 
 GET http://10.0.0.72:5000/users
@@ -14,8 +14,6 @@ Content-Type: application/json
     "email":"yalla.prasad@g7cr.com",
     "userImageUrl":"zoro.png",
     "role":"user"
-
-
 }
 
 ### Get User By UUID

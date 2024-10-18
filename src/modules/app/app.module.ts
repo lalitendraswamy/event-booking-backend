@@ -12,7 +12,7 @@ import { WishlistModule } from '../wishlist/wishlist.module';
 import { TicketBookingModule } from '../ticket-booking/ticket-booking.module';
 import { AppLogger } from 'src/core/logger/app-logger';
 // import { MyLogger } from 'src/core/logger/logger.service';
-
+import { MyLogger } from 'src/core/logger/logger.service';
 
 
 @Module({
