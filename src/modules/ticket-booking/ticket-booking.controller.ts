@@ -9,6 +9,7 @@ export class TicketBookingController {
 
     @Post()
     async createBooking(@Body() body: Partial<TicketBooking>){
+        console.log(body)
         return await this.bookingService.createBooking(body);
     }
 
