@@ -11,35 +11,79 @@ Content-Type: application/json
 
 [
   {
-    "eventName": "Music Festival 2024",
-    "description": "An amazing music festival featuring top artists.",
+    "eventName": "Jokes IN Progress",
+    "description": "Tag Maadu is a weekly Kannada comedy open mic, featuring some of the funniest Kannada acts in town.",
     "eventDateTime": "2024-12-15T18:00:00",
-    "category": "Concerts",
-    "duration": "180", 
+    "category": "Comedy",
+    "duration": "180",
     "totalTickets": "500",
-    "location": "Los Angeles, CA",
+    "location": "Bangalore",
     "averageRating": "4.5",
-    "organizerName": "XYZ Events",
-    "organizerImage": "https://example.com/images/xyz_events.jpg",
-    "imageUrl": "https://example.com/images/music_festival.jpg",
+    "organizerName": "Kamath and Friends",
+    "organizerImage": "https://res.cloudinary.com/dqdo29iis/image/upload/v1722786701/samples/man-portrait.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/baking-jokes-a-stand-up-comedy-open-mic-et00339526-2024-5-16-t-5-1-0.jpg",
     "ticketPrice": "75"
   },
   {
-    "eventName": "Tech Conference 2024",
+    "eventName": "Tag Maadu - Kannada Comedy ",
     "description": "Join us for an insightful tech conference with industry leaders.",
     "eventDateTime": "2024-11-20T09:00:00",
      "category": "Conferences",
     "duration": "360",
     "totalTickets": "300",
-    "location": "San Francisco, CA",
+    "location": "Karnataka",
     "averageRating": "4.7",
-    "organizerName": "TechWorld",
-    "organizerImage": "https://example.com/images/techworld.jpg", 
-    "imageUrl": "https://example.com/images/tech_conference.jpg",
+    "organizerName": "Tag Maadu",
+    "organizerImage": "https://res.cloudinary.com/dqdo29iis/image/upload/v1722786700/samples/smile.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/tag-maadu-kannada-comedy-every-friday-et00411360-2024-9-10-t-6-37-23.jpg",
     "ticketPrice": "150"
-  }
-  
+  },
+  {
+    "eventName": "The Twenties Versus Thirties Show! ",
+    "description": "The Twenties Versus Thirties Show!",
+    "eventDateTime": "2024-06-28T17:00:00",
+    "category": "Comedy",
+    "duration": "120",
+    "totalTickets": "500",
+    "location": "HSR Layout, Bangalore",
+    "averageRating": "4.9",
+    "organizerName": "Comedy Nights",
+    "organizerImage": "https://res.cloudinary.com/dqdo29iis/image/upload/v1722786693/samples/people/boy-snow-hoodie.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/asal-kolaar-live-in-bangalore-et00403644-2024-7-4-t-7-36-7.jpg",
+    "ticketPrice": "200"
+},
+{
+    "eventName": "Asal Kolaar Live in Bangalore",
+    "description": "Asal Kolaar aka Asal Kolar is an Indian film Singer/Lyricst..",
+    "eventDateTime": "2024-07-04T19:30:00",
+    "category": "Music",
+    "duration": "180",
+    "totalTickets": "1000",
+    "location": "Bangalore, Karnataka",
+    "averageRating": "4.8",
+    "organizerName": "Jazz",
+    "organizerImage": "https://res.cloudinary.com/dqdo29iis/image/upload/v1722786693/samples/people/jazz.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/shut-up-and-dance-at-sunburn-union-et00405826-2024-10-15-t-13-51-37.jpg",
+    "ticketPrice": "399"
+},
+{
+    "eventName": "Carve and Paint",
+    "description": "Ready made ceramic pots will be provided for painting and carving a story on the pot.",
+    "eventDateTime": "2024-10-17T18:15:00",
+    "category": "Arts",
+    "duration": "180",
+    "totalTickets": "50",
+    "location": "Pune, Maharashtra",
+    "averageRating": "4.9",
+    "organizerName": "Artistry Workshops",
+    "organizerImage": "https://res.cloudinary.com/dqdo29iis/image/upload/v1722786693/samples/people/smiling-man.jpg",
+    "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/weblisting/carve-and-paint-a-ceramic-vase-et00416434-2024-10-17-t-6-15-8.jpg",
+    "ticketPrice": "350"
+}
+ 
 ]
+ 
+
 
 ### Update Event by ID
 

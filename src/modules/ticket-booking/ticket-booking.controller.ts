@@ -12,6 +12,7 @@ export class TicketBookingController {
         console.log(body)
         return await this.bookingService.createBooking(body);
     }
+    
 
     @Get()
     async getAllBookings(){
