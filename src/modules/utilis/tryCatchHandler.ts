@@ -11,6 +11,7 @@ import { ValidationError, UniqueConstraintError, ForeignKeyConstraintError } fro
 
 export const handleSequelizeErrors = async <T>(fn: () => Promise<T>): Promise<T> => {
   try {
+    
     return await fn();
   } catch (error) {
     if (error instanceof ValidationError) {

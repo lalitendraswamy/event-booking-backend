@@ -10,17 +10,17 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"Benny",
-    "email":"john.benny@g7cr.com",
-    "userImageUrl":"neneThopu.png",
-    "role":"admin"
+    "username":"Prasad",
+    "email":"yalla.prasad@g7cr.com",
+    "userImageUrl":"zoro.png",
+    "role":"user"
 
 
 }
 
 ### Get User By UUID
 
-GET http://localhost:5000/users/2712088d-25f3-47bd-ad29-11007801ee8c
+GET http://localhost:5000/users/ab821db8-0997-48f9-9f48-a9b9d4f28a7e
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 
