@@ -10,7 +10,7 @@ import { ReviewsModule } from '../reviews/reviews.module';
 import { EmailModule } from '../emailService/email.module';
 import { WishlistModule } from '../wishlist/wishlist.module';
 // import { MyLogger } from 'src/core/logger/logger.service';
-
+import { MyLogger } from 'src/core/logger/logger.service';
 
 @Module({
   imports: [
@@ -27,7 +27,7 @@ import { WishlistModule } from '../wishlist/wishlist.module';
     
   ],
   controllers: [AppController],
-  providers: [AppService],
-  exports:[AppService]
+  providers: [AppService,MyLogger],
+  exports:[AppService,MyLogger]
 })
 export class AppModule {}
