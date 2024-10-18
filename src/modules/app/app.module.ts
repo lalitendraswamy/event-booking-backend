@@ -28,7 +28,6 @@ import { AppLogger } from 'src/core/logger/app-logger';
     EventsModule,
     ReviewsModule,
     TicketBookingModule
-    
   ],
   controllers: [AppController],
   providers: [AppService,AppLogger],
