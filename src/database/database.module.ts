@@ -15,6 +15,7 @@ import { ReviewsDao } from './mssql/dao/reviews.dao';
 import { EmailService } from 'src/modules/emailService/email.service';
 import { AppService } from 'src/modules/app/app.service';
 import { WishListDao } from './mssql/dao/wishlist.dao';
+import { BookingDao } from './mssql/dao/ticketBooking.dao';
 
 @Module({
   
@@ -22,8 +23,8 @@ import { WishListDao } from './mssql/dao/wishlist.dao';
     DatabaseConnection,
     SequelizeModule.forFeature([User,  Review,Event, TicketBooking,Wishlist])
   ],
-  providers: [DatabaseService,UserDao,EventsDao,ReviewsDao,WishListDao,EmailService,AppService],
-  exports:[DatabaseService,UserDao,EventsDao,ReviewsDao,WishListDao]
+  providers: [DatabaseService,UserDao,EventsDao,ReviewsDao,WishListDao,BookingDao,EmailService,AppService],
+  exports:[DatabaseService,UserDao,EventsDao,ReviewsDao,WishListDao,BookingDao]
 })
 export class DatabaseModule {}
 
