@@ -12,7 +12,8 @@ export class EventsDao{
 
 
     async getAllEvents(){
-        return handleSequelizeErrors(async () => {     
+        return handleSequelizeErrors(async () => { 
+            this.logger.log("Getting All Events From Dao")
         const events =  await this.eventsModel.findAll({
             include:[
                 {
@@ -36,7 +37,7 @@ export class EventsDao{
         throw new HttpException("Events Not Found", HttpStatus.NOT_FOUND);
     }
 
-    this.logger.log("Getting All Events From Dao")
+    
     return events;
 
 })
@@ -53,14 +54,15 @@ export class EventsDao{
 
     async addEvent(event:Partial<Event>){
         return handleSequelizeErrors(async () => {
+            this.logger.log("Added a New Event from Dao");
         const response =  await this.eventsModel.create(event)
-        this.logger.log("Added a New Event from Dao");
         return response
         })
     }
 
     async getEventByEventId(id:string){
         return handleSequelizeErrors(async () => {
+            this.logger.log("Got a Event by Id from Dao ")
         const event =  await this.eventsModel.findByPk(id,
             {
                 include:[
@@ -83,7 +85,7 @@ export class EventsDao{
         if(!event){
             throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
         }
-        this.logger.log("Got a Event by Id from Dao ")
+       
 
         return event
     });
@@ -91,26 +93,29 @@ export class EventsDao{
 
     async updateEventById(id:string,eventData:Partial<Event>){
         return handleSequelizeErrors(async () => {
+            this.logger.log("Updating Event by Id in Dao");
             const response = await this.eventsModel.findOne({where:{eventId:id}});
             if(!response){
                 throw new HttpException("Event not Found to Update", HttpStatus.NOT_FOUND);
             }
+
         const updatedEvent = await this.eventsModel.update(eventData,{
             where:{eventId:id}
         });
-        this.logger.log("Updated Event by Id in Dao");
+       
         return updatedEvent;
     })
     }
 
     async deleteEventById(id:string){
         return handleSequelizeErrors(async () => {
+            this.logger.log("Deleting Event By Id in Dao");
             const response = await this.eventsModel.findOne({where:{eventId:id}});
             if(!response){
                 throw new HttpException("Event not Found to Delete", HttpStatus.NOT_FOUND);
             }
         const deletedEvent =  await this.eventsModel.destroy({where:{eventId:id}})
-            this.logger.log("Deleted Event By Id in Dao");
+          
         return deletedEvent
         })
     }
