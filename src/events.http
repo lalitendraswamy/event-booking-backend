@@ -104,7 +104,7 @@ Content-Type: application/json
 
 ### Update Event by ID
 
-PUT http://localhost:5000/events/update/091e0ff9-5053-4f2b-9a24-f6e2f19a33e6
+PUT http://localhost:5000/events/update/465db400-cc64-4cfd-9f90-5d56cd8c464f
 Content-Type: application/json
 
 {
