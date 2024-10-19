@@ -31,7 +31,7 @@ export class Event extends Model<Event> {
   category: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(10000),
     allowNull: false,
   })
   description: string;
