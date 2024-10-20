@@ -29,21 +29,31 @@ export class TicketBookingController {
     }
 
     // Stripe Payment Intent API
-    @Post('create-checkout') 
-async createPaymentIntent(@Body() body: { ticketPrice: number; numberOfTickets: number }) {
-    const { ticketPrice, numberOfTickets } = body;
+    @Post('checkout') 
+async createPaymentIntent(@Body() body: any) {
+    
+    const { ticketPrice, numberOfTickets , eventId, imageUrl, eventName, location, category, userId,} = body;
 
     const lineItems = [{
         price_data: {
-            currency: "usd",
+            currency: "inr",
             product_data: {
-                name: "Event Ticket", // Customize this as needed
-                // You can add additional properties like description or images if necessary
+                name: "BLP Evennts Ticket Booking", 
+                description: `Join us for an unforgettable experience at ${eventName} in ${location}.`,
+                images: [imageUrl], // Using imageUrl from body
+                
+                
+                metadata: {
+                    event_id: eventId, // Using eventId from body
+                    category: category, // Using category from body
+                    user_id: userId, // Using userId from body for tracking
+                },
             },
             unit_amount: ticketPrice * 100, // Stripe requires amount in cents
         },
         quantity: numberOfTickets,
     }];
+    
 
     try {
         const session = await this.stripe.checkout.sessions.create({
@@ -53,7 +63,7 @@ async createPaymentIntent(@Body() body: { ticketPrice: number; numberOfTickets: 
             success_url: "http://localhost:3000/success",
             cancel_url: "http://localhost:3000/cancel",
         });
-
+        console.log('session',session)
         return { id: session.id };
     } catch (error) {
         console.error("Error creating checkout session:", error);
