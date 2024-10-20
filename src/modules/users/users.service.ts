@@ -43,9 +43,9 @@ export class UsersService {
         })
     }
     async findUserByEmail(email: string) {
-        return handleSequelizeErrors(async () => {
+        // return handleSequelizeErrors(async () => {
             return await this.userDao.findUserByEmail(email);
-        })
+        // })
     }
 
 

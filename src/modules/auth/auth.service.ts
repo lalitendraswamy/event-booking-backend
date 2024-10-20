@@ -65,6 +65,7 @@ export class AuthService {
 
         let user = await this.userService.findUserByEmail(userDetails.mail)
           console.log("User", user.dataValues)
+
         let customToken = await this.jwtService.generateJwt(user.dataValues)
         
         console.log("Custom token", customToken)
@@ -74,8 +75,9 @@ export class AuthService {
         // console.log("Custom Payload", customPayload)
 
 
-        return {token:customToken,username: user.username,userImageUrl:user.userImageUrl,role:user.role}
+        return {token:customToken,username: user.username,userImageUrl:user.userImageUrl,role:user.role,userId:user.userId}
     } catch (error) {
+      // console.log("aaaa")
         return error
     }
   }

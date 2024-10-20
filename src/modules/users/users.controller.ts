@@ -1,21 +1,23 @@
-import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards, Logger } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/database/mssql/models/user.model';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 import { Role } from 'src/core/enums/roles.enum';
 import { RoleGuard } from '../auth/role.guard';
 import { Roles } from '../auth/role.decorator';
-import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth,ApiBody,ApiExcludeEndpoint} from '@nestjs/swagger';
+import {CreateUserDto} from "./dto/user";
+import { MyLogger } from 'src/core/logger/logger.service';
 
 @ApiTags("users")
 @Controller('users')
 export class UsersController {
-    private readonly logger = new Logger(UsersController.name);
-    constructor(private readonly userService:UsersService){}
+    // private readonly logger = new Logger(UsersController.name);
+    constructor(private readonly userService:UsersService,private readonly logger: MyLogger){}
 
-
-    
-
+    @ApiBearerAuth() 
+    @ApiBody({ description: 'User data to create', type: CreateUserDto })
+    @ApiResponse({ status: 201, description: 'User created successfully.' })
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Post()
@@ -24,13 +26,19 @@ export class UsersController {
         return this.userService.createUser(body);
     }
 
+    @ApiExcludeEndpoint()
     @Post("multiple")
     async insertMultipleUsers(@Body() body: Partial<User>[]){
-        return await this.userService.insertMultipleUsers(body)
+        try{
+            return await this.userService.insertMultipleUsers(body)
+        }catch(err){
+            this.logger.error(err);
+        }
     }
 
+    @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard)
-    // @Roles(Role.admin)
+    @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()  
     async findAll(){
@@ -38,6 +46,7 @@ export class UsersController {
         return this.userService.findAllUsers()
     }
 
+    @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)    
     @Get(":id")
@@ -46,6 +55,7 @@ export class UsersController {
         return await this.userService.findUserById(id);
     }
 
+    @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Get("username/:username")
@@ -59,6 +69,7 @@ export class UsersController {
         return await this.userService.findUserByEmail(email);
     }
 
+    @ApiBody({ description: 'User data to update', type: CreateUserDto })
     @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
@@ -68,7 +79,7 @@ export class UsersController {
         return await this.userService.updateUserById(id,body)
     }
 
-
+    @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Delete("remove/:id")

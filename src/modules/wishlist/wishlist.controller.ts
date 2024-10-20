@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res } from '@nestjs/common';
 import { WishlistService } from './wishlist.service';
 import { Wishlist } from 'src/database/mssql/models/wishlist.model';
+import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags("users")
 @Controller('wishlist')
 export class WishlistController {
     constructor (private readonly wishlistService: WishlistService){}

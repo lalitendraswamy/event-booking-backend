@@ -6,6 +6,7 @@ export function setupSwagger(app: INestApplication) {
     .setTitle('Event Booking API')
     .setDescription('API documentation for the Event Booking system')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('events') 
     .build();
 
