@@ -15,6 +15,10 @@ export class TicketBookingService {
         return await this.bookingDao.getAllBookings();
     }
 
+    async updateBookingById(id:string, bookingData:Partial<TicketBooking>){
+        return await this.bookingDao.updateBookingById(id,bookingData);
+    }
+
     async deleteBookingById(id:string){
         return await this.bookingDao.deleteBookingById(id);
     }

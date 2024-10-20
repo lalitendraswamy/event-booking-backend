@@ -1,7 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { TicketBookingService } from './ticket-booking.service';
 import { TicketBooking } from 'src/database/mssql/models/ticketBookings.model';
 import Stripe from 'stripe';
+import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
 
 @Controller('ticket-booking')
 export class TicketBookingController {
@@ -16,6 +17,11 @@ export class TicketBookingController {
     async createBooking(@Body() body: Partial<TicketBooking>) {
         console.log(body);
         return await this.bookingService.createBooking(body);
+    }
+
+    @Put(":id")
+    async updateBookingById(@Param('id') id:string, @Body() body:Partial<TicketBooking>){
+        return await this.bookingService.updateBookingById(id,body); 
     }
     
 
@@ -56,6 +62,7 @@ async createPaymentIntent(@Body() body: any) {
     }];
     
 
+
     try {
         const session = await this.stripe.checkout.sessions.create({
             payment_method_types: ["card"],
@@ -65,8 +72,22 @@ async createPaymentIntent(@Body() body: any) {
             cancel_url: "http://localhost:3000/cancel",
         });
         console.log('session',session)
+        await this.bookingService.createBooking({
+            numberOfTickets,
+            ticketPrice,
+            sessionId: session.id,
+            eventId,
+            userId
+        })
         return { id: session.id };
     } catch (error) {
+        await this.bookingService.createBooking({
+            numberOfTickets,
+            ticketPrice,
+            status:bookingStatus.failed,
+            eventId,
+            userId
+        })
         console.error("Error creating checkout session:", error);
         throw new BadRequestException("Invalid request parameters"); // You can customize this message
     }

@@ -16,11 +16,12 @@ export class BookingDao{
         return await this.bookingModel.findAll({
             include:[{
                 model:Event
-            }],
-            attributes:{
-                exclude:["createdAt","updatedAt"]
-            }
+            }]
         });
+    }
+
+    async updateBookingById(id:string, bookingData:Partial<TicketBooking>){
+        return await this.bookingModel.update(bookingData, {where:{bookingId:id}});
     }
 
     async deleteBookingById(id:string){
