@@ -10,10 +10,12 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"Prasad",
-    "email":"yalla.prasad@g7cr.com",
-    "userImageUrl":"zoro.png",
-    "role":"user"
+    "username":"lalitendra",
+    "email":"lalitendra.swamy@g7cr.com",
+    "userImageUrl":"https://avatars.githubusercontent.com/u/120158122?v=4",
+    "role":"admin"
+
+
 }
 
 ### Get User By UUID
@@ -29,7 +31,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0Y
 
 
 ### Get User By Email
-GET http://localhost:5000/users/email/vijaya.lakshmi@g7cr.com
+GET http://localhost:5000/users/email/yalla.prasad@g7cr.com
 
 
 

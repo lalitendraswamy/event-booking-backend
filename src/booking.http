@@ -1,0 +1,18 @@
+GET http://localhost:5000/ticket-booking
+
+
+### 
+POST http://localhost:5000/ticket-booking
+Content-Type: application/json
+
+{
+    "numberOfTickets": "3",
+    "ticketPrice": "50",
+    "status": "booked",
+    "eventId": "2247de88-be4f-4f97-854f-52d0fd5c42fe",
+    "userId": "ab821db8-0997-48f9-9f48-a9b9d4f28a7e"
+}
+
+
+###
+DELETE http://localhost:5000/ticket-booking/bdfbd1bf-b75d-4e49-888d-91847ab82955

@@ -13,9 +13,9 @@ export class UserDao {
 
   async createUser(user): Promise<User> {
     return handleSequelizeErrors(async () => {
+      this.logger.log("User Creating in Dao")
       await this.emailService.sendInvitationEmail(user.email, "http://localhost:3000/login");
       const response =  await this.userModel.create(user);
-      this.logger.log("User Created in Dao")
       return response
     });
   }
@@ -31,6 +31,7 @@ export class UserDao {
 
   async findAll(): Promise<User[]> {
     return handleSequelizeErrors(async () => {
+      this.logger.log("Getting Users from Dao")
       const users = await this.userModel.findAll({
         attributes: {
           exclude: ["createdAt", "updatedAt"]
@@ -40,19 +41,20 @@ export class UserDao {
       if (!users) {
         throw new HttpException("Users Not Found", HttpStatus.NOT_FOUND);
       }
-      this.logger.log("Getting Users from Dao")
+    
       return users;
     })
   }
 
   async findUserById(id: string) {
     return handleSequelizeErrors(async () => {
+      this.logger.log("Getting User By Id")
       const user = await this.userModel.findByPk(id);
       if (!user) {
         this.logger.error("User Not Found");
         throw new HttpException("User not Found", HttpStatus.NOT_FOUND);
       }
-      this.logger.log("Got User By Id")
+     
       return user
     })
   }
@@ -84,6 +86,7 @@ export class UserDao {
 
   async updateUserById(id: string, userData: Partial<User>) {
     return handleSequelizeErrors(async () => {
+      this.logger.log("Updating User by Id in Dao")
       const response = await this.userModel.findOne({ where: { userId: id } })
       if (!response) {
         throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
@@ -93,7 +96,7 @@ export class UserDao {
         where: { userId: id }
       });
 
-      this.logger.log("Updated User by Id in Dao")
+      
       return updatedUser
 
     })
@@ -108,7 +111,7 @@ export class UserDao {
       }
 
       const deletedUser = await this.userModel.destroy({ where: { userId: id } })
-      this.logger.log("Deleting a User by Id from Dao");
+      
       return deletedUser;
     })
   }
