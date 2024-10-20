@@ -105,7 +105,6 @@ export class UserDao {
 
   async deleteUserById(id: string) {
     return handleSequelizeErrors(async () => {
-      this.logger.log("Deleting a User by Id from Dao");
       const response = await this.userModel.findOne({ where: { userId: id } })
       if (!response) {
         throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
