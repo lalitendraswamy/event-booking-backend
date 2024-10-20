@@ -3,3 +3,5 @@ import { Sequelize } from 'sequelize-typescript';
  
 @Injectable()
 export class DatabaseService {}
+
+
