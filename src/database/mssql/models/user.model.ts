@@ -33,7 +33,7 @@ export class User extends Model<User> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: false, 
     unique: true,
   })
   email: string;
