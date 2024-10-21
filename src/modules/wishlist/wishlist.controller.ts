@@ -14,8 +14,7 @@ export class WishlistController {
     constructor (private readonly wishlistService: WishlistService){}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary:"Get all wishlist"})
     @ApiResponse({status:200, description:"Return all apis"})
     @Get()
@@ -24,8 +23,7 @@ export class WishlistController {
     }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard)
     @ApiBody({description:"data added successlu", type:CreateWishListDto})
     @ApiOperation({summary:"Add Wishlist Data"})
     @ApiResponse({status:200, description:"wishlist added"})
@@ -36,8 +34,7 @@ export class WishlistController {
     }
     
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary:"Wishlist Deleted"})
     @ApiResponse({status:200, description:"wishlist deleted successly"})
     @Delete(":id")
