@@ -23,7 +23,7 @@ export class UserDao {
   async insertMultipleUsers(usersData: Partial<User>[]) {
     return handleSequelizeErrors(async () => {
       return await this.userModel.bulkCreate(usersData, {
-        validate: true, // Ensures that validation is run on each item
+        validate: true, 
         individualHooks: true,
       })
     });
