@@ -61,5 +61,10 @@ export class AppService {
   }
 
 
+  getStripeSecret():string{
+    return this.configService.get<string>('stripe_secret_key')
+  }
+
+
 
 }
