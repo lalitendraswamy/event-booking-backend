@@ -70,7 +70,6 @@ async createPaymentIntent(@Body() body: any) {
     }];
     
 
-
     try {
         const session = await this.stripe.checkout.sessions.create({
             payment_method_types: ["card"],
@@ -100,5 +99,8 @@ async createPaymentIntent(@Body() body: any) {
         throw new BadRequestException("Invalid request parameters"); // You can customize this message
     }
 }
+
+
+
 
 }
