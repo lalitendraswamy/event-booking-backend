@@ -6,20 +6,20 @@ export const DatabaseConnection = SequelizeModule.forRootAsync({
   inject: [ConfigService],
   useFactory: (configService: ConfigService) => ({
     dialect: 'mssql',
-    host: "localhost",
+    host: configService.get<string>('DB_HOST'),
     port: configService.get<number>('DB_PORT'),
     database: configService.get<string>('DB_NAME'),
-    username:"dbadmin",
-    password:"root",
+    // username:"dbadmin",
+    // password:"root",
     dialectOptions: {
-      // authentication: {
-      //   type: 'ntlm',
-      //   options: {
-      //     domain: "desktop-631q63p",     
-      //     userName: "s v l b prasanna", 
-      //     password: "prasanna",
-      //   },
-      // },
+      authentication: {
+        type: 'ntlm',
+        options: {
+          domain:  configService.get<string>('DB_DOMAIN'),    
+          userName:configService.get<string>('DB_USERNAME'), 
+          password: configService.get<string>('DB_PASSWORD'),
+        },
+      },
       options: {
         trustServerCertificate: true, 
         trustedConnection: true,
