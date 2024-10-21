@@ -1,6 +1,4 @@
 import { SequelizeModule } from '@nestjs/sequelize';
-
-
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 export const DatabaseConnection = SequelizeModule.forRootAsync({
@@ -8,7 +6,7 @@ export const DatabaseConnection = SequelizeModule.forRootAsync({
   inject: [ConfigService],
   useFactory: (configService: ConfigService) => ({
     dialect: 'mssql',
-    host:  configService.get<string>('DB_HOST'),
+    host: configService.get<string>('DB_HOST'),
     port: configService.get<number>('DB_PORT'),
     database: configService.get<string>('DB_NAME'),
     // username:"dbadmin",
@@ -17,9 +15,9 @@ export const DatabaseConnection = SequelizeModule.forRootAsync({
       authentication: {
         type: 'ntlm',
         options: {
-          domain: configService.get<string>('DB_DOMAIN') ,     
-          userName:  configService.get<string>('DB_USERNAME'), 
-          password:  configService.get<string>('DB_PASSWORD'),
+          domain:  configService.get<string>('DB_DOMAIN'),    
+          userName:configService.get<string>('DB_USERNAME'), 
+          password: configService.get<string>('DB_PASSWORD'),
         },
       },
       options: {
@@ -34,4 +32,5 @@ export const DatabaseConnection = SequelizeModule.forRootAsync({
     synchronize: true, // Turn off in production, use migrations instead
   }),
 });
+
 

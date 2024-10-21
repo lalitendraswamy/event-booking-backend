@@ -2,13 +2,6 @@ import { Req, Res } from "@nestjs/common";
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { ValidationError, UniqueConstraintError, ForeignKeyConstraintError } from 'sequelize';
 
-
-
-
-
-
-
-
 export const handleSequelizeErrors = async <T>(fn: () => Promise<T>): Promise<T> => {
   try {
     
