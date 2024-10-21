@@ -26,7 +26,7 @@ export class TicketBookingController {
 
     @Get(":id")
     async getOrdersByUserId(@Param("id") id:string){
-        // console.log("iiiiiiiiiiiiiiiiiiiiiiiii")
+        
         return await this.bookingService.getOrdersByUserId(id);
     }
     
