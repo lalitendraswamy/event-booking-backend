@@ -31,8 +31,17 @@ export class TicketBooking extends Model<TicketBooking> {
   @Column({
     type: DataType.ENUM(...Object.values(bookingStatus)),
     allowNull: false,
+    defaultValue: bookingStatus.booked
   })
-  status: bookingStatus.booked;
+  status: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull:false,
+    defaultValue: "no-session-id"
+  })
+  sessionId: string;
+
 
   @ForeignKey(() => Event)
   @Column({
