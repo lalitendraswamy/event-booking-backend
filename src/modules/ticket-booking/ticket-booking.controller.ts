@@ -23,6 +23,11 @@ export class TicketBookingController {
     async updateBookingById(@Param('id') id:string, @Body() body:Partial<TicketBooking>){
         return await this.bookingService.updateBookingById(id,body); 
     }
+
+    @Get(":id")
+    async getOrdersByUserId(@Param("id") id:string){
+        return await this.bookingService.getOrdersByUserId(id);
+    }
     
 
     @Get()

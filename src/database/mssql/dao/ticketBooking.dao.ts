@@ -24,6 +24,14 @@ export class BookingDao{
         return await this.bookingModel.update(bookingData, {where:{bookingId:id}});
     }
 
+    async getOrdersByUserId(id:string){
+        return await this.bookingModel.findAll({where:{userId:id},
+            include:[{
+                model:Event
+            }]
+        });
+    }
+
     async deleteBookingById(id:string){
         return await this.bookingModel.destroy({where:{
             bookingId:id

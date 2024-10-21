@@ -15,8 +15,8 @@ export class EventsController {
     constructor(private readonly eventsService: EventsService){}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard)
+
     @ApiOperation({ summary: 'Get all Events' })
     @ApiResponse({ status: 200, description: 'Return all Events' })
     @Get()

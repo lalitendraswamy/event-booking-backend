@@ -22,4 +22,8 @@ export class TicketBookingService {
     async deleteBookingById(id:string){
         return await this.bookingDao.deleteBookingById(id);
     }
+
+    async getOrdersByUserId(id:string){
+        return await this.bookingDao.getOrdersByUserId(id);
+    }
 }
