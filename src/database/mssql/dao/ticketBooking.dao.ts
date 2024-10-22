@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { TicketBooking } from "../models/ticketBookings.model";
 import { Event } from "../models/events.model";
@@ -7,6 +7,8 @@ import { handleSequelizeErrors } from "src/modules/utilis/tryCatchHandler";
 
 @Injectable()
 export class BookingDao{
+    private readonly logger = new Logger(BookingDao.name);
+
     constructor(@InjectModel(TicketBooking) private readonly bookingModel: typeof TicketBooking){}
 
     async createBooking(bookingData: Partial<TicketBooking>){
@@ -27,17 +29,19 @@ export class BookingDao{
 
     async getOrdersByUserId(id:string){
         return handleSequelizeErrors(async () => {
-            const result =  await this.bookingModel.findAll({where:{userId:id},
-                include:[{
-                    model:Event
-                }]
-            });
-            // console.log(result)
-            if(!result){
-                throw new HttpException("Data Not Found", HttpStatus.NOT_FOUND )
-            }
-            return result;
-        })
+            this.logger.log("Getting Orders belongs to a User by UserId");
+        const userOrders =  await this.bookingModel.findAll({where:{userId:id},
+            include:[{
+                model:Event
+            }]
+        });
+
+        if(!userOrders){
+            this.logger.error("Orders Not found");
+            throw new HttpException("Orders not Found", HttpStatus.NOT_FOUND);
+        }
+        return userOrders
+    })
     }
 
     async deleteBookingById(id:string){

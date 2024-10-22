@@ -19,10 +19,10 @@ export const handleSequelizeErrors = async <T>(fn: () => Promise<T>): Promise<T>
       throw new HttpException('Foreign key constraint error', HttpStatus.BAD_REQUEST);
     }
 
-    // Log the error for debugging
+
     console.error('Unexpected Sequelize error:', error.message);
 
-    // Rethrow a generic internal server error for unknown issues
+    
     throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
   }
 };

@@ -1,9 +1,10 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { TicketBookingService } from './ticket-booking.service';
 import { TicketBooking } from 'src/database/mssql/models/ticketBookings.model';
 import Stripe from 'stripe';
 import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
 import { AppService } from '../app/app.service';
+import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 
 @Controller('ticket-booking')
 export class TicketBookingController {
@@ -14,6 +15,7 @@ export class TicketBookingController {
         this.stripe = new Stripe(stripeKey);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     async createBooking(@Body() body: Partial<TicketBooking>) {
         console.log(body);
@@ -25,6 +27,7 @@ export class TicketBookingController {
         return await this.bookingService.updateBookingById(id,body); 
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(":id")
     async getOrdersByUserId(@Param("id") id:string){
         
@@ -42,7 +45,7 @@ export class TicketBookingController {
         return await this.bookingService.deleteBookingById(id);
     }
 
-    // Stripe Payment Intent API
+    @UseGuards(JwtAuthGuard)
     @Post('checkout') 
 async createPaymentIntent(@Body() body: any) {
     
@@ -68,7 +71,6 @@ async createPaymentIntent(@Body() body: any) {
         quantity: numberOfTickets,
     }];
     
-
 
     try {
         const session = await this.stripe.checkout.sessions.create({
@@ -99,5 +101,8 @@ async createPaymentIntent(@Body() body: any) {
         throw new BadRequestException("Invalid request parameters"); // You can customize this message
     }
 }
+
+
+
 
 }
