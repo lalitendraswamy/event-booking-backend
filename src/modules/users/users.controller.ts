@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/database/mssql/models/user.model';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
@@ -19,13 +19,14 @@ export class UsersController {
     @ApiBearerAuth() 
     @ApiBody({ description: 'User data to create', type: CreateUserDto })
     @ApiResponse({ status: 201, description: 'User created successfully.' })
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Post()
-    async create(@Body() body: { username: string; email: string, role?:Role }) {
+    async create(@Body() body: CreateUserDto) {
         this.logger.log("Handling Post request in User Controller")
         return this.userService.createUser(body);
     }
+
 
     @ApiExcludeEndpoint()
     @Post("multiple")
@@ -38,8 +39,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard)
-    @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()  
     async findAll(){
@@ -48,8 +49,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)    
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)    
     @Get(":id")
     async findUserById(@Param("id") id:string){
         this.logger.log("handle get User by Id request in Controller")
@@ -72,8 +73,8 @@ export class UsersController {
 
     @ApiBody({ description: 'User data to update', type: CreateUserDto })
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Put("update/:id")
     async updateUserById(@Param("id") id:string, @Body() body:Partial<User> ){
         this.logger.log("handle Update user by Id request in Controller");
@@ -81,8 +82,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteUserById(@Param("id") id:string){
         this.logger.log("handle delete User By Id request in Controller");

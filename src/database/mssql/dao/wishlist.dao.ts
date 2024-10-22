@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Wishlist } from "../models/wishlist.model";
-import { Review } from "../models/reviews.model";
 import { User } from "../models/user.model";
 import {Event} from "../models/events.model"
 

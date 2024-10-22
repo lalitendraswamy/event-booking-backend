@@ -42,10 +42,10 @@ export class UsersService {
             return await this.userDao.findUserByName(username);
         })
     }
-    async findUserByEmail(email: string) {
-        // return handleSequelizeErrors(async () => {
+    async findUserByEmail(email: string):Promise<any> {
+        
             return await this.userDao.findUserByEmail(email);
-        // })
+       
     }
 
 

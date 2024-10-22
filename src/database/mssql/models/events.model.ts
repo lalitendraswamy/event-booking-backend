@@ -1,5 +1,4 @@
 import { Column, Model, Table, DataType, HasMany, BelongsToMany, AllowNull } from 'sequelize-typescript';
-import { Review } from './reviews.model';
 import { TicketBooking } from './ticketBookings.model';
 import { Wishlist } from './wishlist.model';
 import { User } from './user.model';
@@ -60,11 +59,7 @@ export class Event extends Model<Event> {
   })
   location: string;
 
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: true,
-  })
-  averageRating: number;
+  
 
   @Column({
     type:DataType.STRING,
@@ -92,13 +87,7 @@ export class Event extends Model<Event> {
 
 
 
-  @HasMany(() => Review,
-  {
-    onDelete:'CASCADE',
-    hooks:true
-  })
-  reviews: Review[];
-
+  
   @HasMany(() => TicketBooking,
   {
     onDelete:'CASCADE',

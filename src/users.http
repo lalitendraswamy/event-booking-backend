@@ -1,5 +1,5 @@
 GET http://localhost:5000/users
-Authorization: Bearer 51c8ccba-7994-46cd-a9e9-03f097a268dc
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjM4ZDM3Yi00Nzg5LTQ3NjctYWIyYS0wNGMwY2QwODhhYzYiLCJ1c2VybmFtZSI6IlByYXNhZCIsInVzZXJJbWFnZVVybCI6Inpvcm8ucG5nIiwiZW1haWwiOiJ5YWxsYS5wcmFzYWRAZzdjci5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyOTU4MDQ4MCwiZXhwIjoxNzI5ODM5NjgwfQ.syzrpemuFIbZXBeqIGKUfPJTEPyWmKlYbelU6SJhQMI
 ###
 
 GET http://10.0.0.72:5000/users
@@ -10,17 +10,15 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"lalitendra",
-    "email":"lalitendra.swamy@g7cr.com",
+    "username":"Bennyy",
+    "email":"john.bennyy@g7cr.com",
     "userImageUrl":"https://avatars.githubusercontent.com/u/120158122?v=4",
     "role":"admin"
-
-
 }
 
 ### Get User By UUID
 
-GET http://localhost:5000/users/ab821db8-0997-48f9-9f48-a9b9d4f28a7e
+GET http://localhost:5000/users/0638d37b-4789-4767-ab2a-04c0cd088ac6
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 
@@ -36,8 +34,8 @@ GET http://localhost:5000/users/email/yalla.prasad@g7cr.com
 
 
 ### Update User By UUID
-PUT  http://localhost:5000/users/update/c484a2ab-e923-423c-8c7a-5de85dc85193
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
+PUT  http://localhost:5000/users/update/ba166822-f3d7-44b0-a4e2-11de4d631e63
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 Content-Type: application/json
 
 {
@@ -47,7 +45,7 @@ Content-Type: application/json
 }
 
 ### Delete User By Id
-DELETE  http://localhost:5000/users/remove/2c1d6c95-ec9a-4c48-8814-9cb848964a06
+DELETE  http://localhost:5000/users/remove/4da746de-d363-4ed7-883d-4b93bc0c0483
 //Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 

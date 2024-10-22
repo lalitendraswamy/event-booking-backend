@@ -1,29 +1,36 @@
-import { Req, Res } from "@nestjs/common";
+import { NotFoundException, Req, Res } from "@nestjs/common";
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { ValidationError, UniqueConstraintError, ForeignKeyConstraintError } from 'sequelize';
 
-export const handleSequelizeErrors = async <T>(fn: () => Promise<T>): Promise<T> => {
+export const handleSequelizeErrors = async (fn: () => Promise<any>): Promise<any> => {
   try {
-    
     return await fn();
   } catch (error) {
-    if (error instanceof ValidationError) {
-      throw new HttpException(error.errors.map(err => err.message).join(', '), HttpStatus.BAD_REQUEST);
-    }
+   
+    // if(error instanceof NotFoundException){
+    //   console.log("Inside Catch")
+    //   return {code: HttpStatus.NOT_FOUND, message:"Data Not Found"};
+    // }
 
     if (error instanceof UniqueConstraintError) {
-      throw new HttpException('Duplicate entry, unique constraint violated', HttpStatus.CONFLICT);
+      return {code:HttpStatus.CONFLICT, message:"Duplicate Field Entry. Unique Constraint Error"};
     }
 
     if (error instanceof ForeignKeyConstraintError) {
-      throw new HttpException('Foreign key constraint error', HttpStatus.BAD_REQUEST);
+      return {code:HttpStatus.BAD_REQUEST, message:"Invalid Foreign Key Entry."}
+    }
+
+    if (error instanceof ValidationError) {
+      console.log("Inside Validation Error");
+      return {code:HttpStatus.BAD_REQUEST, message:"Cannot POST or PUT due to Invalid Fields"}
     }
 
 
     console.error('Unexpected Sequelize error:', error.message);
 
     
-    throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    // throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    return {code: HttpStatus.INTERNAL_SERVER_ERROR, message:"Internal Server Error"}
   }
 };
 

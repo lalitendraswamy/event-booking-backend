@@ -1,5 +1,4 @@
 import { Column, Model, Table, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
-import { Review } from './reviews.model';
 import { TicketBooking } from './ticketBookings.model';
 import { Event } from './events.model';
 import { Wishlist } from './wishlist.model';
@@ -41,16 +40,10 @@ export class User extends Model<User> {
   @Column({
     type: DataType.ENUM(...Object.values(Role)),
     allowNull: false,
-    // enum: Role,
     defaultValue: Role.user
   })
   role: Role;
 
-  @HasMany(() => Review,{
-    onDelete:'CASCADE',
-    hooks:true
-  })
-  reviews: Review[];
 
   @HasMany(() => TicketBooking,
   {
@@ -59,7 +52,7 @@ export class User extends Model<User> {
   })
   bookings: TicketBooking[];
 
-  @BelongsToMany(() => Event, () => Wishlist) // Establish many-to-many relation
-  favoriteEvents: Event[]; // Alias for the wishlist events
+  @BelongsToMany(() => Event, () => Wishlist) 
+  favoriteEvents: Event[]; 
 }
 
