@@ -56,10 +56,6 @@ export const handleAsync = async <T>(fn: () => Promise<T>): Promise<T> => {
 
 
 
-
-
-
-
 // export const handler = async (serviceMethod) =>{
 //     return async (@Req() req:Request ,@Res()res:Response) =>{
 //             try{

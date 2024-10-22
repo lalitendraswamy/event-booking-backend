@@ -25,8 +25,7 @@ export class EventsDao{
                     attributes:["username"]
                 }
             ]
-        }
-        
+        }   
     ],
     attributes:{
         exclude:["createdAt", "updatedAt"]
@@ -42,6 +41,8 @@ export class EventsDao{
 
 })
     }
+
+    
 
     async insertMultipleEvents(eventsData:Partial<Event>[]){
         return handleSequelizeErrors(async () => {

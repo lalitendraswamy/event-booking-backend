@@ -106,6 +106,6 @@ export class Event extends Model<Event> {
   })
   bookings: TicketBooking[];
 
-  @BelongsToMany(() => User, () => Wishlist) // Establish many-to-many relation
-  usersWhoFavorited: User[]; // Alias for users who favorited this event
+  @BelongsToMany(() => User, () => Wishlist) 
+  usersWhoFavorited: User[]; 
 }
