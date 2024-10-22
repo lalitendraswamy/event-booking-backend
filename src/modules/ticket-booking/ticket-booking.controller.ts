@@ -13,7 +13,7 @@ export class TicketBookingController {
         this.stripe = new Stripe('sk_test_51Q8hB3Rq55caQ1GVjwUiAwOdyX4l7CcpooFoP9eQ5TAdrhqxRIEZKcT9YPHxX20w5FZnNOnJDYJdJv0rfsGWC6hG000ebC3AYr');
     }
 
-    @Post()
+    @Post() 
     async createBooking(@Body() body: Partial<TicketBooking>) {
         console.log(body);
         return await this.bookingService.createBooking(body);

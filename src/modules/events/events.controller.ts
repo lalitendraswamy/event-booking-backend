@@ -15,8 +15,7 @@ export class EventsController {
     constructor(private readonly eventsService: EventsService){}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
-
+    // @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Get all Events' })
     @ApiResponse({ status: 200, description: 'Return all Events' })
     @Get()
@@ -28,6 +27,7 @@ export class EventsController {
     
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
+    @ApiOperation({ summary: 'Get Event By Id' })
     @Get("get/:id")
     async getEventById(@Param('id') id:string){
         this.logger.log("Handling Get Event by Id Request in Events Controller")
@@ -40,6 +40,7 @@ export class EventsController {
         return await this.eventsService.insertMultipleEvents(body)
     }
     
+    @ApiOperation({ summary: 'Add Event' })
     @ApiBearerAuth()
     @ApiBody({description:"Event added",type:CreateEventDto})
     @UseGuards(JwtAuthGuard,RoleGuard)
@@ -49,7 +50,8 @@ export class EventsController {
         this.logger.log("Handling creating a Event Request in Events Controller")
         return await this.eventsService.addEvent(body);
     }
-
+    
+    @ApiOperation({ summary: 'Upadate The Event' })
     @ApiBearerAuth()
     @ApiBody({description:"Event added",type:CreateEventDto})
     @UseGuards(JwtAuthGuard,RoleGuard)
@@ -62,6 +64,7 @@ export class EventsController {
     
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard,RoleGuard)
+    @ApiOperation({ summary: 'Delete Event' })
     @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteEventById(@Param("id") id:string){

@@ -19,6 +19,7 @@ export class UsersController {
     @ApiBearerAuth() 
     @ApiBody({ description: 'User data to create', type: CreateUserDto })
     @ApiResponse({ status: 201, description: 'User created successfully.' })
+    @ApiOperation({ summary: 'Add User' })
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Post()
@@ -49,6 +50,7 @@ export class UsersController {
 
     @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
+    @ApiOperation({ summary: 'Find By Id' })
     @Roles(Role.admin)    
     @Get(":id")
     async findUserById(@Param("id") id:string){
@@ -59,17 +61,19 @@ export class UsersController {
     @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
+    @ApiOperation({ summary: 'Find By User Name' })
     @Get("username/:username")
     async findUserByName(@Param("username") username:string){
         return await this.userService.findUserByName(username);
     }
     
-
+    @ApiOperation({ summary: 'Find By User Email' })
     @Get("email/:email")
     async findUserByEmail(@Param("email") email:string){
         return await this.userService.findUserByEmail(email);
     }
 
+    @ApiOperation({ summary: 'Upadate User By Id' })
     @ApiBody({ description: 'User data to update', type: CreateUserDto })
     @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
@@ -82,6 +86,7 @@ export class UsersController {
 
     @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
+    @ApiOperation({ summary: 'Remove User By Id' })
     @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteUserById(@Param("id") id:string){

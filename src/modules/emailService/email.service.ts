@@ -2,9 +2,6 @@ import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { AppService } from '../app/app.service';
 
-
-
-
 @Injectable()
 export class EmailService {
   private transporter: nodemailer.Transporter;
@@ -15,7 +12,7 @@ export class EmailService {
       host: this.appService.getSmtp_host(),
       port: +this.appService.getSmtp_port(),
       secure: false, // true for 465, false for other ports
-      auth: {
+      auth: { 
         user: this.appService.getSmtp_user(),
         pass: this.appService.getSmtp_pass(),
       },
