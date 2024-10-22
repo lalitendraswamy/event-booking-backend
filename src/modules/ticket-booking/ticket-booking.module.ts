@@ -3,13 +3,15 @@ import { TicketBookingService } from './ticket-booking.service';
 import { TicketBookingController } from './ticket-booking.controller';
 import { DatabaseModule } from 'src/database/database.module';
 import { MyLogger } from 'src/core/logger/logger.service';
+import { AppService } from '../app/app.service';
 
 @Module({
   imports:[
     DatabaseModule,
     MyLogger
   ],
-  providers: [TicketBookingService,MyLogger],
+  providers: [TicketBookingService,MyLogger,AppService],
+
   controllers: [TicketBookingController],
   exports:[TicketBookingService]
 })
