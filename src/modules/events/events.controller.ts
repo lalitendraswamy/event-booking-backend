@@ -15,7 +15,7 @@ export class EventsController {
     constructor(private readonly eventsService: EventsService){}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard,RoleGuard)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
   
     @ApiOperation({ summary: 'Get all Events' })
     @ApiResponse({ status: 200, description: 'Return all Events' })
@@ -69,23 +69,47 @@ export class EventsController {
         return await this.eventsService.deleteEventById(id);
     }
 
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard,RoleGuard)
+  // @Roles(Role.admin,Role.user)
+  // @Get("filters")
+  // async getFilteredEvents(
+  //   @Query('category') category: string,
+  //   @Query('eventDateTime') eventDateTime: string,
+  //   @Query('minTicketPrice') minTicketPrice: number,
+  //   @Query('maxTicketPrice') maxTicketPrice: number,
+  //   @Query('location') location: string, 
+  // ) {
+  //   const filters = {
+  //     category,
+  //     eventDateTime,
+  //     minTicketPrice: Number(minTicketPrice),
+  //     maxTicketPrice: Number(maxTicketPrice),
+  //     location,
+  //   };
+    
+  //   return this.eventsService.getFilteredEvents(filters);
+  // }
+
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard,RoleGuard)
-  @Roles(Role.admin,Role.user)
+  // @UseGuards(JwtAuthGuard,RoleGuard)
+  // @Roles(Role.admin,Role.user)
   @Get("filters")
   async getFilteredEvents(
     @Query('category') category: string,
     @Query('eventDateTime') eventDateTime: string,
     @Query('minTicketPrice') minTicketPrice: number,
     @Query('maxTicketPrice') maxTicketPrice: number,
-    @Query('location') location: string, 
-  ) {
+    @Query('location') location: string,
+    @Query('page') page: number = 1, 
+  ): Promise<{ events: Event[], totalItems: number }> {
     const filters = {
       category,
       eventDateTime,
       minTicketPrice: Number(minTicketPrice),
       maxTicketPrice: Number(maxTicketPrice),
       location,
+      page: Number(page),  
     };
     
     return this.eventsService.getFilteredEvents(filters);

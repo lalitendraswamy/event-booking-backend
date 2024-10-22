@@ -1,5 +1,5 @@
 GET http://localhost:5000/users
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjM4ZDM3Yi00Nzg5LTQ3NjctYWIyYS0wNGMwY2QwODhhYzYiLCJ1c2VybmFtZSI6IlByYXNhZCIsInVzZXJJbWFnZVVybCI6Inpvcm8ucG5nIiwiZW1haWwiOiJ5YWxsYS5wcmFzYWRAZzdjci5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyOTU4MDQ4MCwiZXhwIjoxNzI5ODM5NjgwfQ.syzrpemuFIbZXBeqIGKUfPJTEPyWmKlYbelU6SJhQMI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYjgyMWRiOC0wOTk3LTQ4ZjktOWY0OC1hOWI5ZDRmMjhhN2UiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjoibmVuZVRob3B1LnBuZyIsImVtYWlsIjoiam9obi5iZW5ueUBnN2NyLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyOTUwMTczNiwiZXhwIjoxNzI5NzYwOTM2fQ.BqhzgabyLnubnEjvpHnwarAVnnXysZOMdxFflHzxokA
 ###
 
 GET http://10.0.0.72:5000/users
@@ -44,8 +44,8 @@ Content-Type: application/json
 }
 
 ### Delete User By Id
-DELETE  http://localhost:5000/users/remove/4da746de-d363-4ed7-883d-4b93bc0c0483
-//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
+DELETE  http://localhost:5000/users/remove/1f630d6b-4046-4712-a392-1b5d8c182450
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYjgyMWRiOC0wOTk3LTQ4ZjktOWY0OC1hOWI5ZDRmMjhhN2UiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjoibmVuZVRob3B1LnBuZyIsImVtYWlsIjoiam9obi5iZW5ueUBnN2NyLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyOTUwMTczNiwiZXhwIjoxNzI5NzYwOTM2fQ.BqhzgabyLnubnEjvpHnwarAVnnXysZOMdxFflHzxokA
 
 
 
@@ -54,26 +54,22 @@ DELETE  http://localhost:5000/users/remove/4da746de-d363-4ed7-883d-4b93bc0c0483
 POST http://localhost:5000/users/multiple/
 Content-Type: application/json
 
-[
-    
+[   
 {
     "username":"Vamsi",
     "email":"nagasai.vamsi@g7cr.com",
     "role":"user"
-
 },
     
 {
     "username":"Tejaswini",
     "email":"botla.tejaswini@g7cr.com",
     "role":"user"
-
 },
     
 {
     "username":"Nagasritha",
     "email":"nagasritha.er@g7cr.com",
     "role":"user"
-
 }
 ]

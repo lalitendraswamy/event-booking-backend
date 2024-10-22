@@ -21,7 +21,7 @@ export class EventsDao{
     }
     }
     );
-    if(!events){
+    if(events.length===0){
         // throw new HttpException("Events Not Found", HttpStatus.NOT_FOUND);
         return {statusCode : HttpStatus.NOT_FOUND, message: messages.notFoundEvents};
     }
@@ -96,19 +96,64 @@ export class EventsDao{
         })
     }
 
-    async getFilteredEvents(filters: {
-        category?: string;
-        eventDateTime?: string;  
-        minTicketPrice?: number;
-        maxTicketPrice?: number;
-        location?: string;  
-      }): Promise<Event[]> {
-        const { category, eventDateTime, minTicketPrice, maxTicketPrice, location } = filters;
+    // async getFilteredEvents(filters: {
+    //     category?: string;
+    //     eventDateTime?: string;  
+    //     minTicketPrice?: number;
+    //     maxTicketPrice?: number;
+    //     location?: string;  
+    //   }): Promise<Event[]> {
+    //     const { category, eventDateTime, minTicketPrice, maxTicketPrice, location } = filters;
     
         
-        const whereConditions: any = {};
+    //     const whereConditions: any = {};
     
        
+    //     if (category) {
+    //       whereConditions.category = category;
+    //     }
+    
+        
+    //     if (eventDateTime) {
+    //       const date = new Date(eventDateTime);
+    //       whereConditions.eventDateTime = { [Op.eq]: date };
+    //     }
+    
+
+    //     if (minTicketPrice || maxTicketPrice) {
+    //       whereConditions.ticketPrice = {};
+    //       if (minTicketPrice) {
+    //         whereConditions.ticketPrice[Op.gte] = minTicketPrice;
+    //       }
+    //       if (maxTicketPrice) {
+    //         whereConditions.ticketPrice[Op.lte] = maxTicketPrice;
+    //       }
+    //     }
+    
+        
+    //     if (location) {
+    //       whereConditions.location = { [Op.like]: `%${location}%` };  // Use LIKE for partial matching
+    //     }
+    
+        
+    //     return await this.eventsModel.findAll({
+    //       where: whereConditions,
+    //     });
+    //   }
+
+      async getFilteredEvents(filters: {
+        category?: string;
+        eventDateTime?: string;
+        minTicketPrice?: number;
+        maxTicketPrice?: number;
+        location?: string;
+        page?: number; 
+      }): Promise<{ events: Event[], totalItems: number }> {
+        const { category, eventDateTime, minTicketPrice, maxTicketPrice, location, page = 1 } = filters;
+    
+        const whereConditions: any = {};
+    
+        
         if (category) {
           whereConditions.category = category;
         }
@@ -119,7 +164,7 @@ export class EventsDao{
           whereConditions.eventDateTime = { [Op.eq]: date };
         }
     
-
+        
         if (minTicketPrice || maxTicketPrice) {
           whereConditions.ticketPrice = {};
           if (minTicketPrice) {
@@ -132,13 +177,29 @@ export class EventsDao{
     
         
         if (location) {
-          whereConditions.location = { [Op.like]: `%${location}%` };  // Use LIKE for partial matching
+          whereConditions.location = { [Op.like]: `%${location}%` };
         }
     
         
-        return await this.eventsModel.findAll({
+        const limit = 6;
+        const offset = (page - 1) * limit;
+    
+        
+        const totalItems = await this.eventsModel.count({
           where: whereConditions,
         });
+    
+        
+        const events = await this.eventsModel.findAll({
+          where: whereConditions,
+          limit,
+          offset,
+        });
+    
+        
+        return {
+          events,
+          totalItems,
+        };
       }
-
 }

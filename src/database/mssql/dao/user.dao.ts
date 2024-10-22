@@ -41,7 +41,7 @@ export class UserDao {
         }
       });
       // console.log("Users", users)
-      if (!users) {
+      if (users.length === 0) {
         return {statusCode : HttpStatus.NOT_FOUND, message:messages.notFoundUsers};
       }
     

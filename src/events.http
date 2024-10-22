@@ -81,7 +81,7 @@ Content-Type: application/json
 
 ### Get Events By Filters
 
-GET http://localhost:5000/events/filters?category=Music&eventDateTime=2024-11-11T06:54:00.000Z&location=bangalore
+GET http://localhost:5000/events/filters?page=2
 
 
 # [

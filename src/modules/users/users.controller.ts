@@ -19,8 +19,8 @@ export class UsersController {
     @ApiBearerAuth() 
     @ApiBody({ description: 'User data to create', type: CreateUserDto })
     @ApiResponse({ status: 201, description: 'User created successfully.' })
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Post()
     async create(@Body() body: CreateUserDto) {
         this.logger.log("Handling Post request in User Controller")

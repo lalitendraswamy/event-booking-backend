@@ -7,12 +7,15 @@ Content-Type: application/json
 
 {
     "numberOfTickets": "3",
-    "ticketPrice": "50",
-    "status": "booked",
-    "eventId": "2247de88-be4f-4f97-854f-52d0fd5c42fe",
-    "userId": "ab821db8-0997-48f9-9f48-a9b9d4f28a7e"
+    "eventId": "14dd3d02-667d-482e-9634-bdfeeeb499b4",
+    "userId": "be716b55-8afd-4122-8121-213afc9517ac"
 }
 
 
 ###
-DELETE http://localhost:5000/ticket-booking/bdfbd1bf-b75d-4e49-888d-91847ab82955
+GET http://localhost:5000/ticket-booking/be716b55-8afd-4122-8121-213afc9517ac
+
+
+
+###
+DELETE http://localhost:5000/ticket-booking/remove/3399624d-91bd-4db3-aa55-1bb47ebe286d

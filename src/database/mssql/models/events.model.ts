@@ -80,12 +80,12 @@ export class Event extends Model<Event> {
   })
   imageUrl: string;
 
+  
   @Column({
     type: DataType.FLOAT,
     allowNull: false,
   })
   ticketPrice: number;
-
 
 
   
