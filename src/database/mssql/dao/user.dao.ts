@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { Role } from 'src/core/enums/roles.enum';
 import { EmailService } from 'src/modules/emailService/email.service';
 import { handleSequelizeErrors } from 'src/modules/utilis/tryCatchHandler';
+import { messages } from 'src/core/shared/responseMessages';
 
 
 @Injectable()
@@ -11,12 +12,14 @@ export class UserDao {
   private readonly logger = new Logger(UserDao.name)
   constructor(@InjectModel(User) private readonly userModel: typeof User, private readonly emailService: EmailService) { }
 
-  async createUser(user): Promise<User> {
+  async createUser(user){
     return handleSequelizeErrors(async () => {
       this.logger.log("User Creating in Dao")
-      await this.emailService.sendInvitationEmail(user.email, "http://localhost:3000/login");
       const response =  await this.userModel.create(user);
-      return response
+      await this.emailService.sendInvitationEmail(user.email, "http://localhost:3000/login");
+      // console.log(response);
+  
+      return {statusCode :HttpStatus.CREATED, message: messages.postUser , data:response}
     });
   }
 
@@ -29,7 +32,7 @@ export class UserDao {
     });
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<any> {
     return handleSequelizeErrors(async () => {
       this.logger.log("Getting Users from Dao")
       const users = await this.userModel.findAll({
@@ -38,11 +41,11 @@ export class UserDao {
         }
       });
       // console.log("Users", users)
-      if (!users) {
-        throw new HttpException("Users Not Found", HttpStatus.NOT_FOUND);
+      if (users.length === 0) {
+        return {statusCode : HttpStatus.NOT_FOUND, message:messages.notFoundUsers};
       }
     
-      return users;
+      return {data:users, statusCode :HttpStatus.OK,message:messages.usersFound };
     })
   }
 
@@ -51,11 +54,12 @@ export class UserDao {
       this.logger.log("Getting User By Id")
       const user = await this.userModel.findByPk(id);
       if (!user) {
-        this.logger.error("User Not Found");
-        throw new HttpException("User not Found", HttpStatus.NOT_FOUND);
+        this.logger.error(messages.notFoundUser);
+        // throw new HttpException("User not Found", HttpStatus.NOT_FOUND);
+        return {statusCode :HttpStatus.NOT_FOUND, message:messages.notFoundUser}
       }
      
-      return user
+      return {data:user, statusCode :HttpStatus.OK, message:messages.userFound}
     })
   }
 
@@ -67,7 +71,7 @@ export class UserDao {
   }
 
 
-  async findUserByEmail(email: string): Promise<User> {
+  async findUserByEmail(email: string) {
     return handleSequelizeErrors(async () => {
       const user = await this.userModel.findOne({
         where: { email: email },
@@ -76,9 +80,10 @@ export class UserDao {
         }
       });
       if (!user) {
-        throw new HttpException("User not Found", HttpStatus.NOT_FOUND);
+        // throw new HttpException("User not Found", HttpStatus.NOT_FOUND);
+        return {statusCode : HttpStatus.NOT_FOUND, message:messages.notFoundUser}
       }
-      return user
+      return {statusCode :HttpStatus.OK,message:messages.userFound, data:user}
     })
   }
 
@@ -88,16 +93,20 @@ export class UserDao {
     return handleSequelizeErrors(async () => {
       this.logger.log("Updating User by Id in Dao")
       const response = await this.userModel.findOne({ where: { userId: id } })
+      // console.log("Update User", response)
       if (!response) {
-        throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
+        // throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
+        return {statusCode : HttpStatus.NOT_FOUND, message:messages.notFoundUser+ " while Updating"};
+      }else{
+
+        const updatedUser =  await this.userModel.update(userData, {
+          where: { userId: id }
+        });
+  
+        // console.log("updatedUser",updatedUser)
+        return {statusCode :HttpStatus.NO_CONTENT, message:messages.updateUser};
       }
 
-      const updatedUser =  await this.userModel.update(userData, {
-        where: { userId: id }
-      });
-
-      
-      return updatedUser
 
     })
   }
@@ -106,16 +115,15 @@ export class UserDao {
   async deleteUserById(id: string) {
     return handleSequelizeErrors(async () => {
       const response = await this.userModel.findOne({ where: { userId: id } })
+      // console.log("Delete responsee", response)
       if (!response) {
-        throw new HttpException("User Not Found", HttpStatus.NOT_FOUND);
+        return {statusCode :HttpStatus.NOT_FOUND, message:messages.notFoundUser + " while Deleting"}
       }
-
       const deletedUser = await this.userModel.destroy({ where: { userId: id } })
+      // console.log("Deleted", deletedUser)
       
-      return deletedUser;
+      return {statusCode :HttpStatus.NO_CONTENT, message:messages.deleteUser};
     })
   }
-
-
 
 }

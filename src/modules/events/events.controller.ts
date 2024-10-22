@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { Event } from 'src/database/mssql/models/events.model';
 import { ApiTags,ApiOperation,ApiResponse, ApiExcludeEndpoint, ApiBody, ApiBearerAuth} from '@nestjs/swagger';
@@ -15,8 +15,8 @@ export class EventsController {
     constructor(private readonly eventsService: EventsService){}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
-
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+  
     @ApiOperation({ summary: 'Get all Events' })
     @ApiResponse({ status: 200, description: 'Return all Events' })
     @Get()
@@ -27,7 +27,7 @@ export class EventsController {
     }
     
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard,RoleGuard)
     @Get("get/:id")
     async getEventById(@Param('id') id:string){
         this.logger.log("Handling Get Event by Id Request in Events Controller")
@@ -68,5 +68,51 @@ export class EventsController {
         this.logger.log("Handling delete a Event by Id Request in Events Controller")
         return await this.eventsService.deleteEventById(id);
     }
+
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard,RoleGuard)
+  // @Roles(Role.admin,Role.user)
+  // @Get("filters")
+  // async getFilteredEvents(
+  //   @Query('category') category: string,
+  //   @Query('eventDateTime') eventDateTime: string,
+  //   @Query('minTicketPrice') minTicketPrice: number,
+  //   @Query('maxTicketPrice') maxTicketPrice: number,
+  //   @Query('location') location: string, 
+  // ) {
+  //   const filters = {
+  //     category,
+  //     eventDateTime,
+  //     minTicketPrice: Number(minTicketPrice),
+  //     maxTicketPrice: Number(maxTicketPrice),
+  //     location,
+  //   };
+    
+  //   return this.eventsService.getFilteredEvents(filters);
+  // }
+
+  @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard,RoleGuard)
+  // @Roles(Role.admin,Role.user)
+  @Get("filters")
+  async getFilteredEvents(
+    @Query('category') category: string,
+    @Query('eventDateTime') eventDateTime: string,
+    @Query('minTicketPrice') minTicketPrice: number,
+    @Query('maxTicketPrice') maxTicketPrice: number,
+    @Query('location') location: string,
+    @Query('page') page: number = 1, 
+  ): Promise<{ events: Event[], totalItems: number }> {
+    const filters = {
+      category,
+      eventDateTime,
+      minTicketPrice: Number(minTicketPrice),
+      maxTicketPrice: Number(maxTicketPrice),
+      location,
+      page: Number(page),  
+    };
+    
+    return this.eventsService.getFilteredEvents(filters);
+  }
 
 }

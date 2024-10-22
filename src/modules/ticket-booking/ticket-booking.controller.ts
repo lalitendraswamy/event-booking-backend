@@ -3,8 +3,8 @@ import { TicketBookingService } from './ticket-booking.service';
 import { TicketBooking } from 'src/database/mssql/models/ticketBookings.model';
 import Stripe from 'stripe';
 import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
-import { AppService } from '../app/app.service';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
+import { AppService } from '../app/app.service';
 
 @Controller('ticket-booking')
 export class TicketBookingController {
@@ -15,7 +15,7 @@ export class TicketBookingController {
         this.stripe = new Stripe(stripeKey);
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Post()
     async createBooking(@Body() body: Partial<TicketBooking>) {
         console.log(body);
@@ -27,7 +27,7 @@ export class TicketBookingController {
         return await this.bookingService.updateBookingById(id,body); 
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get(":id")
     async getOrdersByUserId(@Param("id") id:string){
         
@@ -40,8 +40,9 @@ export class TicketBookingController {
         return await this.bookingService.getAllBookings();
     }
 
-    @Delete(':id')
+    @Delete('remove/:id')
     async deleteBookingById(@Param('id') id: string) {
+        console.log("Booking Id in Controller", id);
         return await this.bookingService.deleteBookingById(id);
     }
 
@@ -83,7 +84,6 @@ async createPaymentIntent(@Body() body: any) {
         console.log('session',session)
         await this.bookingService.createBooking({
             numberOfTickets,
-            ticketPrice,
             sessionId: session.id,
             eventId,
             userId
@@ -92,7 +92,6 @@ async createPaymentIntent(@Body() body: any) {
     } catch (error) {
         await this.bookingService.createBooking({
             numberOfTickets,
-            ticketPrice,
             status:bookingStatus.failed,
             eventId,
             userId
