@@ -1,5 +1,4 @@
 import { Column, Model, Table, DataType, HasMany, BelongsToMany, AllowNull } from 'sequelize-typescript';
-import { Review } from './reviews.model';
 import { TicketBooking } from './ticketBookings.model';
 import { Wishlist } from './wishlist.model';
 import { User } from './user.model';
@@ -23,6 +22,7 @@ export class Event extends Model<Event> {
   })
   eventName: string;
 
+  
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -31,7 +31,7 @@ export class Event extends Model<Event> {
   category: string;
 
   @Column({
-    type: DataType.STRING(10000),
+    type: DataType.STRING,
     allowNull: false,
   })
   description: string;
@@ -60,11 +60,7 @@ export class Event extends Model<Event> {
   })
   location: string;
 
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: true,
-  })
-  averageRating: number;
+  
 
   @Column({
     type:DataType.STRING,
@@ -92,13 +88,7 @@ export class Event extends Model<Event> {
 
 
 
-  @HasMany(() => Review,
-  {
-    onDelete:'CASCADE',
-    hooks:true
-  })
-  reviews: Review[];
-
+  
   @HasMany(() => TicketBooking,
   {
     onDelete:'CASCADE',
@@ -106,6 +96,6 @@ export class Event extends Model<Event> {
   })
   bookings: TicketBooking[];
 
-  @BelongsToMany(() => User, () => Wishlist) // Establish many-to-many relation
-  usersWhoFavorited: User[]; // Alias for users who favorited this event
+  @BelongsToMany(() => User, () => Wishlist) 
+  usersWhoFavorited: User[]; 
 }

@@ -1,19 +1,22 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { TicketBookingService } from './ticket-booking.service';
 import { TicketBooking } from 'src/database/mssql/models/ticketBookings.model';
 import Stripe from 'stripe';
 import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
+import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
+import { AppService } from '../app/app.service';
 
 @Controller('ticket-booking')
 export class TicketBookingController {
     private stripe: Stripe;
 
-    constructor(private readonly bookingService: TicketBookingService) {
-        // Initialize Stripe with your secret key
-        this.stripe = new Stripe('sk_test_51Q8hB3Rq55caQ1GVjwUiAwOdyX4l7CcpooFoP9eQ5TAdrhqxRIEZKcT9YPHxX20w5FZnNOnJDYJdJv0rfsGWC6hG000ebC3AYr');
+    constructor(private readonly bookingService: TicketBookingService,private readonly appService:AppService,) {
+        const stripeKey=this.appService.getStripeSecret();
+        this.stripe = new Stripe(stripeKey);
     }
 
-    @Post() 
+    @UseGuards(JwtAuthGuard)
+    @Post()
     async createBooking(@Body() body: Partial<TicketBooking>) {
         console.log(body);
         return await this.bookingService.createBooking(body);
@@ -24,8 +27,10 @@ export class TicketBookingController {
         return await this.bookingService.updateBookingById(id,body); 
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(":id")
     async getOrdersByUserId(@Param("id") id:string){
+        
         return await this.bookingService.getOrdersByUserId(id);
     }
     
@@ -40,7 +45,7 @@ export class TicketBookingController {
         return await this.bookingService.deleteBookingById(id);
     }
 
-    // Stripe Payment Intent API
+    @UseGuards(JwtAuthGuard)
     @Post('checkout') 
 async createPaymentIntent(@Body() body: any) {
     

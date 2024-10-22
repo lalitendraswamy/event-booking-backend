@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 
 export function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('Event Booking API')
+    .setTitle('BLP Event Booking APIs')
     .setDescription('API documentation for the Event Booking system')
     .setVersion('1.0')
     .addBearerAuth()
