@@ -2,7 +2,7 @@ import { NotFoundException, Req, Res } from "@nestjs/common";
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { ValidationError, UniqueConstraintError, ForeignKeyConstraintError } from 'sequelize';
 
-export const handleSequelizeErrors = async (fn: () => Promise<any>): Promise<any> => {
+export const handleSequelizeErrors = async <T>(fn: () => Promise<T>): Promise<T> => {
   try {
     return await fn();
   } catch (error) {
@@ -13,26 +13,30 @@ export const handleSequelizeErrors = async (fn: () => Promise<any>): Promise<any
     // }
 
     if (error instanceof UniqueConstraintError) {
-      return {code:HttpStatus.CONFLICT, message:"Duplicate Field Entry. Unique Constraint Error"};
+      // return {code:HttpStatus.CONFLICT, message:"Duplicate Field Entry. Unique Constraint Error"};
+      throw new HttpException("Duplicate Field Entry. Unique Constraint Error", HttpStatus.CONFLICT)
     }
-
+    
     if (error instanceof ForeignKeyConstraintError) {
-      return {code:HttpStatus.BAD_REQUEST, message:"Invalid Foreign Key Entry."}
+      // return {code:HttpStatus.BAD_REQUEST, message:"Invalid Foreign Key Entry."}
+      throw new HttpException("Invalid Foreign Key Entry.", HttpStatus.BAD_REQUEST)
     }
-
+    
     if (error instanceof ValidationError) {
       console.log("Inside Validation Error");
-      return {code:HttpStatus.BAD_REQUEST, message:"Cannot POST or PUT due to Invalid Fields"}
+      throw new HttpException("Cannot POST or PUT due to Invalid Fields", HttpStatus.BAD_REQUEST)
+      // return {code:HttpStatus.BAD_REQUEST, message:"Cannot POST or PUT due to Invalid Fields"}
     }
 
 
     console.error('Unexpected Sequelize error:', error.message);
 
     
-    // throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
-    return {code: HttpStatus.INTERNAL_SERVER_ERROR, message:"Internal Server Error"}
+    // return {code: HttpStatus.INTERNAL_SERVER_ERROR, message:"Internal Server Error"}
+    throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
   }
 };
+
 
 
 
@@ -55,6 +59,7 @@ export const handleAsync = async <T>(fn: () => Promise<T>): Promise<T> => {
     );
   }
 };
+
 
 
 

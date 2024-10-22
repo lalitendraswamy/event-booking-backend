@@ -10,7 +10,7 @@ export class UsersService {
     private readonly logger = new Logger(UsersService.name)
     constructor(private readonly userDao: UserDao) { }
 
-    async createUser(user): Promise<User> {
+    async createUser(user){
         return handleSequelizeErrors(async () => {
             this.logger.log("Creating a User from Service");
             return await this.userDao.createUser(user);

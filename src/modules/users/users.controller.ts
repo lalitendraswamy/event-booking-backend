@@ -19,8 +19,8 @@ export class UsersController {
     @ApiBearerAuth() 
     @ApiBody({ description: 'User data to create', type: CreateUserDto })
     @ApiResponse({ status: 201, description: 'User created successfully.' })
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @Post()
     async create(@Body() body: CreateUserDto) {
         this.logger.log("Handling Post request in User Controller")
@@ -40,7 +40,7 @@ export class UsersController {
 
     @ApiBearerAuth() 
     @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()  
     async findAll(){
@@ -73,8 +73,8 @@ export class UsersController {
 
     @ApiBody({ description: 'User data to update', type: CreateUserDto })
     @ApiBearerAuth() 
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @Put("update/:id")
     async updateUserById(@Param("id") id:string, @Body() body:Partial<User> ){
         this.logger.log("handle Update user by Id request in Controller");
@@ -82,8 +82,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteUserById(@Param("id") id:string){
         this.logger.log("handle delete User By Id request in Controller");

@@ -10,15 +10,14 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"Bennyy",
-    "email":"john.bennyy@g7cr.com",
-    "userImageUrl":"https://avatars.githubusercontent.com/u/120158122?v=4",
+    "username":"Benny",
+    "email":"john.benny@g7cr.com",
     "role":"admin"
 }
 
 ### Get User By UUID
 
-GET http://localhost:5000/users/0638d37b-4789-4767-ab2a-04c0cd088ac6
+GET http://localhost:5000/users/276babe4-ed91-439e-b0dc-f3cbfba03bbc
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTA4MTIsImV4cCI6MTcyODkxNDQxMn0.Z9KWJtSf9-AHTZaDZwp8b9uTosUy06jlIw7RSaVKeLg
 
 
@@ -59,7 +58,6 @@ Content-Type: application/json
     
 {
     "username":"Vamsi",
-    "userImageUrl": "teamwork.png",
     "email":"nagasai.vamsi@g7cr.com",
     "role":"user"
 
@@ -67,7 +65,6 @@ Content-Type: application/json
     
 {
     "username":"Tejaswini",
-    "userImageUrl": "botla.png",
     "email":"botla.tejaswini@g7cr.com",
     "role":"user"
 
@@ -75,7 +72,6 @@ Content-Type: application/json
     
 {
     "username":"Nagasritha",
-    "userImageUrl": "teamwork.png",
     "email":"nagasritha.er@g7cr.com",
     "role":"user"
 

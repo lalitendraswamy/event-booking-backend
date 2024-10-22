@@ -28,7 +28,7 @@ export class User extends Model<User> {
     type:DataType.STRING,
     allowNull:true
   })
-  userImageUrl:string;
+  userImageUrl:string | null ;
 
   @Column({
     type: DataType.STRING,

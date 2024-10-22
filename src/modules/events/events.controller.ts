@@ -15,8 +15,8 @@ export class EventsController {
     constructor(private readonly eventsService: EventsService){}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
-
+    @UseGuards(JwtAuthGuard,RoleGuard)
+  
     @ApiOperation({ summary: 'Get all Events' })
     @ApiResponse({ status: 200, description: 'Return all Events' })
     @Get()
@@ -27,7 +27,7 @@ export class EventsController {
     }
     
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard,RoleGuard)
     @Get("get/:id")
     async getEventById(@Param('id') id:string){
         this.logger.log("Handling Get Event by Id Request in Events Controller")
@@ -69,7 +69,9 @@ export class EventsController {
         return await this.eventsService.deleteEventById(id);
     }
 
-    
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard,RoleGuard)
+  @Roles(Role.admin,Role.user)
   @Get("filters")
   async getFilteredEvents(
     @Query('category') category: string,

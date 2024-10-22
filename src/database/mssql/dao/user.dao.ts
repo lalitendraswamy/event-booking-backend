@@ -12,7 +12,7 @@ export class UserDao {
   private readonly logger = new Logger(UserDao.name)
   constructor(@InjectModel(User) private readonly userModel: typeof User, private readonly emailService: EmailService) { }
 
-  async createUser(user): Promise<User> {
+  async createUser(user){
     return handleSequelizeErrors(async () => {
       this.logger.log("User Creating in Dao")
       const response =  await this.userModel.create(user);
@@ -71,7 +71,7 @@ export class UserDao {
   }
 
 
-  async findUserByEmail(email: string): Promise<User> {
+  async findUserByEmail(email: string) {
     return handleSequelizeErrors(async () => {
       const user = await this.userModel.findOne({
         where: { email: email },
@@ -125,7 +125,5 @@ export class UserDao {
       return {statusCode :HttpStatus.NO_CONTENT, message:messages.deleteUser};
     })
   }
-
-
 
 }

@@ -8,8 +8,8 @@ export class RoleGuard implements CanActivate {
  
   canActivate(context: ExecutionContext): boolean {
     const requiredRole = this.reflector.get<string>(ROLES_KEY, context.getHandler());
-    if (!requiredRole) {
-      return true; // If no role is specified, allow access
+    if (!requiredRole || requiredRole.length===0 ) {
+      return true; 
     }
  
     const request = context.switchToHttp().getRequest();
@@ -20,7 +20,8 @@ export class RoleGuard implements CanActivate {
       throw new HttpException("You are Not Authorized to access this Resource",HttpStatus.UNAUTHORIZED)
     }
     
-    if (user.role !== requiredRole) {
+    const hasAccess = requiredRole.includes(user.role);
+    if (!hasAccess) {
       
       // return {code:HttpStatus.FORBIDDEN,message:"Only Admin can Access this Resource"}
       throw new HttpException("Only Admin can Access this Resource",HttpStatus.FORBIDDEN)
