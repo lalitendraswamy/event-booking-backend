@@ -3,15 +3,16 @@ import { TicketBookingService } from './ticket-booking.service';
 import { TicketBooking } from 'src/database/mssql/models/ticketBookings.model';
 import Stripe from 'stripe';
 import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
+import { AppService } from '../app/app.service';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 
 @Controller('ticket-booking')
 export class TicketBookingController {
     private stripe: Stripe;
 
-    constructor(private readonly bookingService: TicketBookingService) {
-        // Initialize Stripe with your secret key
-        this.stripe = new Stripe('sk_test_51Q8hB3Rq55caQ1GVjwUiAwOdyX4l7CcpooFoP9eQ5TAdrhqxRIEZKcT9YPHxX20w5FZnNOnJDYJdJv0rfsGWC6hG000ebC3AYr');
+    constructor(private readonly bookingService: TicketBookingService,private readonly appService:AppService,) {
+        const stripeKey=this.appService.getStripeSecret();
+        this.stripe = new Stripe(stripeKey);
     }
 
     @UseGuards(JwtAuthGuard)
@@ -29,6 +30,7 @@ export class TicketBookingController {
     @UseGuards(JwtAuthGuard)
     @Get(":id")
     async getOrdersByUserId(@Param("id") id:string){
+        
         return await this.bookingService.getOrdersByUserId(id);
     }
     

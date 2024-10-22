@@ -5,7 +5,6 @@ import { Event } from "../models/events.model";
 import { handleSequelizeErrors } from "src/modules/utilis/tryCatchHandler";
 
 
-
 @Injectable()
 export class BookingDao{
     private readonly logger = new Logger(BookingDao.name);
