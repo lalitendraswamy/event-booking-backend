@@ -9,7 +9,7 @@ export class RoleGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const requiredRole = this.reflector.get<string>(ROLES_KEY, context.getHandler());
     if (!requiredRole) {
-      return true; // If no role is specified, allow access
+      return true; 
     }
  
     const request = context.switchToHttp().getRequest();
