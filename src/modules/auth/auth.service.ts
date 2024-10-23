@@ -57,16 +57,14 @@ export class AuthService {
             }
         );
 
-        let userDetails = await this.getUserDetails(tokenResponse.data.access_token)
-        let tokenAndData = {
-            token:tokenResponse.data,
-            userDetails:userDetails
-        }
+        let userDetailsFromMicrosoft = await this.getUserDetails(tokenResponse.data.access_token)
+      
 
-        let user = await this.userService.findUserByEmail(userDetails.mail)
-          console.log("User", user.dataValues)
+        let user = await this.userService.findUserByEmail(userDetailsFromMicrosoft.mail)
+          console.log("User", user.data)
+        let userDataValues = user.data.dataValues
 
-        let customToken = await this.jwtService.generateJwt(user.dataValues)
+        let customToken = await this.jwtService.generateJwt(userDataValues)
         
         console.log("Custom token", customToken)
 
@@ -75,7 +73,13 @@ export class AuthService {
         // console.log("Custom Payload", customPayload)
 
 
-        return {token:customToken,username: user.username,userImageUrl:user.userImageUrl,role:user.role,userId:user.userId}
+        return {
+          token:customToken,
+            username: userDataValues.username,
+            userImageUrl:userDataValues.userImageUrl,
+            role:userDataValues.role,
+            userId:userDataValues.userId
+          }
     } catch (error) {
       // console.log("aaaa")
         return error

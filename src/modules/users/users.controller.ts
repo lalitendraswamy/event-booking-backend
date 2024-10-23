@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete, UseGuards, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/database/mssql/models/user.model';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
@@ -8,7 +8,7 @@ import { Roles } from '../auth/role.decorator';
 import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth,ApiBody,ApiExcludeEndpoint} from '@nestjs/swagger';
 import {CreateUserDto} from "./dto/user";
 import { MyLogger } from 'src/core/logger/logger.service';
-
+ 
 
 @ApiTags("users")
 @Controller('users')
@@ -22,10 +22,11 @@ export class UsersController {
     // @UseGuards(JwtAuthGuard,RoleGuard)
     // @Roles(Role.admin)
     @Post()
-    async create(@Body() body: { username: string; email: string, role?:Role }) {
+    async create(@Body() body: CreateUserDto) {
         this.logger.log("Handling Post request in User Controller")
         return this.userService.createUser(body);
     }
+
 
     @ApiExcludeEndpoint()
     @Post("multiple")
@@ -48,8 +49,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)    
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)    
     @Get(":id")
     async findUserById(@Param("id") id:string){
         this.logger.log("handle get User by Id request in Controller")

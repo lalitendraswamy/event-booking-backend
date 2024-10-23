@@ -37,10 +37,6 @@ export class CreateEventDto {
   @IsString()
   location: string;
 
-  @ApiProperty({ description: 'The AverageRating' })
-  @IsOptional()
-  @IsNumber()
-  averageRating: number;
 
   @ApiProperty({ description: 'The AverageRating' })
   @IsOptional()

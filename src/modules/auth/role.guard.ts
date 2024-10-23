@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, ForbiddenException, HttpStatus, HttpException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from './role.decorator';
  
@@ -8,7 +8,7 @@ export class RoleGuard implements CanActivate {
  
   canActivate(context: ExecutionContext): boolean {
     const requiredRole = this.reflector.get<string>(ROLES_KEY, context.getHandler());
-    if (!requiredRole) {
+    if (!requiredRole || requiredRole.length===0 ) {
       return true; 
     }
  
@@ -16,11 +16,15 @@ export class RoleGuard implements CanActivate {
     const user = request.user;
  
     if (!user || !user.role) {
-      throw new ForbiddenException('You do not have permission to access this resource');
+      // return {code:HttpStatus.UNAUTHORIZED,message:"You are Not Authorized to access this Resource"}
+      throw new HttpException("You are Not Authorized to access this Resource",HttpStatus.UNAUTHORIZED)
     }
- 
-    if (user.role !== requiredRole) {
-      throw new ForbiddenException('You do not have permission to access this resource');
+    
+    const hasAccess = requiredRole.includes(user.role);
+    if (!hasAccess) {
+      
+      // return {code:HttpStatus.FORBIDDEN,message:"Only Admin can Access this Resource"}
+      throw new HttpException("Only Admin can Access this Resource",HttpStatus.FORBIDDEN)
     }
  
     return true; 

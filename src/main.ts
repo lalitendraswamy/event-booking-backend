@@ -13,8 +13,8 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  const appLogger = app.get(AppLogger);
-  app.useGlobalFilters(new GlobalExceptionFilter(appLogger));
+  // const appLogger = app.get(AppLogger);
+  // app.useGlobalFilters(new GlobalExceptionFilter(appLogger));
   setupSwagger(app);
   await app.listen(5000,() =>{
     console.log("post:5000")

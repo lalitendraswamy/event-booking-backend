@@ -6,7 +6,6 @@ import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
 import { DatabaseModule } from '../../database/database.module';
 import { EventsModule } from '../events/events.module';
-import { ReviewsModule } from '../reviews/reviews.module';
 import { EmailModule } from '../emailService/email.module';
 import { WishlistModule } from '../wishlist/wishlist.module';
 import { TicketBookingModule } from '../ticket-booking/ticket-booking.module';
@@ -26,7 +25,6 @@ import { MyLogger } from 'src/core/logger/logger.service';
     UsersModule,
     WishlistModule,
     EventsModule,
-    ReviewsModule,
     TicketBookingModule
   ],
   controllers: [AppController],

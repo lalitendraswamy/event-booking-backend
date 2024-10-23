@@ -50,5 +50,9 @@ export class EventsService {
         })
     }
 
+    async getFilteredEvents(filters){
+        return await this.eventsDao.getFilteredEvents(filters)
+    }
+
 }
 
