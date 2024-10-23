@@ -6,6 +6,8 @@ import { handleSequelizeErrors } from "src/modules/utilis/tryCatchHandler";
 import { Sequelize } from "sequelize-typescript";
 import { messages } from "src/core/shared/responseMessages";
 import { User } from "../models/user.model";
+import { CreateBookingDto } from "src/modules/ticket-booking/dto/bookingPost.dto";
+import { UpdateBookingDto } from "src/modules/ticket-booking/dto/bookingPut";
 
 
 
@@ -26,7 +28,7 @@ export class BookingDao{
     // }
 
 
-  async createBooking(bookingData: Partial<TicketBooking>) {
+  async createBooking(bookingData: CreateBookingDto) {
       const transaction = await this.sequelize.transaction();
       try {
       const event = await this.eventsModel.findByPk(bookingData.eventId, { transaction });
@@ -82,7 +84,7 @@ export class BookingDao{
         })
     }
 
-    async updateBookingById(id:string, bookingData:Partial<TicketBooking>){
+    async updateBookingById(id:string, bookingData:UpdateBookingDto){
         return await this.bookingModel.update(bookingData, {where:{bookingId:id}});
     }
 

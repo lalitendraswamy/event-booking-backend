@@ -5,8 +5,8 @@ import { WishListDao } from 'src/database/mssql/dao/wishlist.dao';
 export class WishlistService {
     constructor(private readonly wishlistDao:WishListDao){}
 
-    async getAllWishList(){
-        return await this.wishlistDao.getAllWishListData();
+    async getAllWishList(userId:string){
+        return await this.wishlistDao.getAllWishListData(userId);
     }
 
     async insertWishList(wishlist){

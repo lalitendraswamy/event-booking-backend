@@ -1,14 +1,14 @@
-import { IsOptional,IsString,IsNumber } from "class-validator";
+import { IsOptional,IsString,IsNumber, IsNotEmpty } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateWishListDto{
     @ApiProperty({description:"create the userId"})
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     userId: string;
 
     @ApiProperty({description:"create the eventId"})
-    @IsOptional()
     @IsString()
+    @IsNotEmpty()
     eventId: string;
 }
