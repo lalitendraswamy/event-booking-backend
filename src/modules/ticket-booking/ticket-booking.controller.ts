@@ -5,35 +5,36 @@ import Stripe from 'stripe';
 import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 import { AppService } from '../app/app.service';
+import { CreateBookingDto } from './dto/bookingPost.dto';
+import { UpdateBookingDto } from './dto/bookingPut';
 
 @Controller('ticket-booking')
 export class TicketBookingController { 
     private stripe: Stripe;
 
-    constructor(private readonly bookingService: TicketBookingService,private readonly appService:AppService,) {
-        const stripeKey=this.appService.getStripeSecret();
+    constructor(private readonly bookingService: TicketBookingService, private readonly appService: AppService,) {
+        const stripeKey = this.appService.getStripeSecret();
         this.stripe = new Stripe(stripeKey);
     }
 
     // @UseGuards(JwtAuthGuard)
     @Post()
-    async createBooking(@Body() body: Partial<TicketBooking>) {
+    async createBooking(@Body() body: CreateBookingDto) {
         console.log(body);
         return await this.bookingService.createBooking(body);
     }
 
     @Put(":id")
-    async updateBookingById(@Param('id') id:string, @Body() body:Partial<TicketBooking>){
-        return await this.bookingService.updateBookingById(id,body); 
+    async updateBookingById(@Param('id') id: string, @Body() body: UpdateBookingDto) {
+        return await this.bookingService.updateBookingById(id, body);
     }
 
     // @UseGuards(JwtAuthGuard)
     @Get(":id")
-    async getOrdersByUserId(@Param("id") id:string){
-        
+    async getOrdersByUserId(@Param("id") id: string) {
         return await this.bookingService.getOrdersByUserId(id);
     }
-    
+
 
     @Get()
     async getAllBookings() {
@@ -47,59 +48,71 @@ export class TicketBookingController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post('checkout') 
-async createPaymentIntent(@Body() body: any) {
-    
-    const { ticketPrice, numberOfTickets , eventId, imageUrl, eventName, location, category, userId,} = body;
+    @Post('checkout')
+    async createPaymentIntent(@Body() body: {
+        ticketPrice:number,
+         numberOfTickets:number, 
+         eventId:string, 
+         imageUrl:string, 
+         eventName:string, 
+         location:string, 
+         category:string, 
+         userId:string
+    }) {
 
-    const lineItems = [{
-        price_data: {
-            currency: "inr",
-            product_data: {
-                name: "BLP Evennts Ticket Booking", 
-                description: `Join us for an unforgettable experience at ${eventName} in ${location}.`,
-                images: [imageUrl], // Using imageUrl from body
-                
-                
-                metadata: {
-                    event_id: eventId, // Using eventId from body
-                    category: category, // Using category from body
-                    user_id: userId, // Using userId from body for tracking
+        const { ticketPrice, numberOfTickets, eventId, imageUrl, eventName, location, category, userId, } = body;
+
+        const lineItems = [{
+            price_data: {
+                currency: "inr",
+                product_data: {
+                    name: "BLP Evennts Ticket Booking",
+                    description: `Join us for an unforgettable experience at ${eventName} in ${location}.`,
+                    images: [imageUrl], // Using imageUrl from body
+
+
+                    metadata: {
+                        event_id: eventId, // Using eventId from body
+                        category: category, // Using category from body
+                        user_id: userId, // Using userId from body for tracking
+                    },
                 },
+                unit_amount: ticketPrice * 100, // Stripe requires amount in cents
             },
-            unit_amount: ticketPrice * 100, // Stripe requires amount in cents
-        },
-        quantity: numberOfTickets,
-    }];
-    
+            quantity: numberOfTickets,
+        }];
 
-    try {
-        const session = await this.stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            line_items: lineItems,
-            mode: "payment",
-            success_url: "http://localhost:3000/success",
-            cancel_url: "http://localhost:3000/cancel",
-        });
-        console.log('session',session)
-        await this.bookingService.createBooking({
-            numberOfTickets,
-            sessionId: session.id,
-            eventId,
-            userId
-        })
-        return { id: session.id };
-    } catch (error) {
-        await this.bookingService.createBooking({
-            numberOfTickets,
-            status:bookingStatus.failed,
-            eventId,
-            userId
-        })
-        console.error("Error creating checkout session:", error);
-        throw new BadRequestException("Invalid request parameters"); // You can customize this message
+
+
+        try {
+            const session = await this.stripe.checkout.sessions.create({
+                payment_method_types: ["card"],
+                line_items: lineItems,
+                mode: "payment",
+                success_url: "http://localhost:3000/success",
+                cancel_url: "http://localhost:3000/cancel",
+            });
+            console.log('session', session)
+            await this.bookingService.createBooking({
+                numberOfTickets,
+                sessionId: session.id,
+                status:bookingStatus.booked,
+                eventId,
+                userId
+            })
+            return { id: session.id };
+        } catch (error) {
+            await this.bookingService.createBooking({
+                numberOfTickets,
+                sessionId:undefined,
+                status: bookingStatus.failed,
+                eventId,
+                userId
+            })
+            console.error("Error creating checkout session:", error);
+            throw new BadRequestException("Invalid request parameters"); // You can customize this message
+        }
     }
-}
 
 
 

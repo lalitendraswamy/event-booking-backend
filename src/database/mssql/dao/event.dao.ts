@@ -5,6 +5,7 @@ import { User } from "../models/user.model";
 import { handleSequelizeErrors } from "src/modules/utilis/tryCatchHandler";
 import { messages } from "src/core/shared/responseMessages";
 import { Op } from "sequelize";
+import { CreateEventDto } from "src/modules/events/dto/eventPost.dto";
 
 @Injectable()
 export class EventsDao{
@@ -43,11 +44,11 @@ export class EventsDao{
     })
     }
 
-    async addEvent(event:Partial<Event>){
+    async addEvent(event:CreateEventDto){
         return handleSequelizeErrors(async () => {
             this.logger.log("Added a New Event from Dao");
         const response =  await this.eventsModel.create(event)
-        return response
+        return {statusCode:HttpStatus.CREATED,message:messages.postEvent}
         })
     }
 
@@ -148,8 +149,19 @@ export class EventsDao{
         maxTicketPrice?: number;
         location?: string;
         page?: number; 
-      }) {
-        const { category, eventDateTime, minTicketPrice, maxTicketPrice, location, page = 1 } = filters;
+        limit?:number;
+      }){
+      return handleSequelizeErrors(async () => {
+        const { 
+          category, 
+          eventDateTime, 
+          minTicketPrice, 
+          maxTicketPrice, 
+          location, 
+          page = 1,
+          limit=6 
+        } = filters;
+
     
         const whereConditions: any = {};
     
@@ -160,8 +172,12 @@ export class EventsDao{
     
         
         if (eventDateTime) {
-          const date = new Date(eventDateTime);
-          whereConditions.eventDateTime = { [Op.eq]: date };
+          const startDate = new Date(eventDateTime);
+          const endDate = new Date(eventDateTime);
+
+            endDate.setHours(23,59,59,999);
+
+          whereConditions.eventDateTime = { [Op.between]: [startDate,endDate] };
         }
     
         
@@ -181,7 +197,7 @@ export class EventsDao{
         }
     
         
-        const limit = 6;
+        // const limit = 6;
         const offset = (page - 1) * limit;
     
         
@@ -195,11 +211,20 @@ export class EventsDao{
           limit,
           offset,
         });
+
+        if(events.length===0){
+          return {statusCode:HttpStatus.NOT_FOUND,message:messages.notFoundEvents}
+        }
     
         
-        return {statusCode:HttpStatus.OK,message:"Filtered List of Events Found Successfully", data: {
-          events,
-          totalItems,
-        }};
-      }
+        return {
+          statusCode:HttpStatus.OK, 
+          message:messages.filteredEventsFound, 
+          data:{events,totalItems}};
+      
+      })
+}
+
+
+
 }

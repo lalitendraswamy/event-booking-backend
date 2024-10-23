@@ -2,13 +2,15 @@ import { Injectable, Logger } from '@nestjs/common';
 import { BookingDao } from 'src/database/mssql/dao/ticketBooking.dao';
 import { TicketBooking } from 'src/database/mssql/models/ticketBookings.model';
 import { handleSequelizeErrors } from '../utilis/tryCatchHandler';
+import { CreateBookingDto } from './dto/bookingPost.dto';
+import { UpdateBookingDto } from './dto/bookingPut';
 
 @Injectable()
 export class TicketBookingService {
     private readonly logger = new Logger(TicketBookingService.name);
     constructor(private readonly bookingDao: BookingDao){}
 
-    async createBooking(bookingData: Partial<TicketBooking>){
+    async createBooking(bookingData: CreateBookingDto){
         return await this.bookingDao.createBooking(bookingData);
     }
 
@@ -16,7 +18,7 @@ export class TicketBookingService {
         return await this.bookingDao.getAllBookings();
     }
 
-    async updateBookingById(id:string, bookingData:Partial<TicketBooking>){
+    async updateBookingById(id:string, bookingData:UpdateBookingDto){
         return await this.bookingDao.updateBookingById(id,bookingData);
     }
 

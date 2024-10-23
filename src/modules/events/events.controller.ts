@@ -6,7 +6,8 @@ import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 import { RoleGuard } from '../auth/role.guard';
 import { Roles } from '../auth/role.decorator';
 import { Role } from 'src/core/enums/roles.enum';
-import {CreateEventDto} from "./dto/event";
+import {CreateEventDto} from "./dto/eventPost.dto";
+import { UpdateEventDto } from './dto/eventPut.dto';
 
 @ApiTags('events')
 @Controller('events')
@@ -42,20 +43,20 @@ export class EventsController {
     
     @ApiBearerAuth()
     @ApiBody({description:"Event added",type:CreateEventDto})
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Post("add")
-    async addEvent(@Body() body :Partial<Event>){
+    async addEvent(@Body() body :CreateEventDto){
         this.logger.log("Handling creating a Event Request in Events Controller")
         return await this.eventsService.addEvent(body);
     }
 
     @ApiBearerAuth()
-    @ApiBody({description:"Event added",type:CreateEventDto})
+    @ApiBody({description:"Event Updated",type:UpdateEventDto})
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Put("update/:id")
-    async updateEventById(@Param('id') id:string, @Body() body:Partial<Event>){
+    async updateEventById(@Param('id') id:string, @Body() body:UpdateEventDto){
         this.logger.log("Handling Updating a Event by Id Request in Events Controller")
         return await this.eventsService.updateEventById(id,body);
     }
@@ -102,14 +103,16 @@ export class EventsController {
     @Query('maxTicketPrice') maxTicketPrice: number,
     @Query('location') location: string,
     @Query('page') page: number = 1, 
-  ) {
+    @Query('limit') limit: number = 6
+  ){
     const filters = {
       category,
       eventDateTime,
       minTicketPrice: Number(minTicketPrice),
       maxTicketPrice: Number(maxTicketPrice),
       location,
-      page: Number(page),  
+      page: Number(page),
+      limit: Number(limit)
     };
     
     return await this.eventsService.getFilteredEvents(filters);

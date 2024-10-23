@@ -25,8 +25,7 @@ export class Event extends Model<Event> {
   
   @Column({
     type: DataType.STRING,
-    allowNull: false,
-    defaultValue:undefined
+    allowNull: false
   })
   category: string;
 

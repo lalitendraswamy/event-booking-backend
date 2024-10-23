@@ -11,7 +11,7 @@ async function bootstrap() {
   app.enableCors()
   // app.useLogger(app.get(MyLogger));
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({whitelist:true,forbidNonWhitelisted:true}));
 
   // const appLogger = app.get(AppLogger);
   // app.useGlobalFilters(new GlobalExceptionFilter(appLogger));
