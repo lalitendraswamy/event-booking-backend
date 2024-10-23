@@ -60,7 +60,7 @@ export class BookingDao{
         //         model:Event
         //     }]
         // });
-        return handleSequelizeErrors(async () => {
+        return handleSequelizeErrors(async () => { 
             const bookings = await this.bookingModel.findAll({
                     include:[{
                         model:Event

@@ -13,7 +13,7 @@ export class UserDao {
   constructor(@InjectModel(User) private readonly userModel: typeof User, private readonly emailService: EmailService) { }
 
   async createUser(user){
-    return handleSequelizeErrors(async () => {
+    return handleSequelizeErrors(async () => { 
       this.logger.log("User Creating in Dao")
       const response =  await this.userModel.create(user);
       console.log(response)
