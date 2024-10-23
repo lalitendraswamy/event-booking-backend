@@ -6,7 +6,7 @@ export const handleSequelizeErrors = async <T>(fn: () => Promise<T>): Promise<T>
   try {
     return await fn();
   } catch (error) {
-   
+   console.log("Instance of Errorrrr", error)
     // if(error instanceof NotFoundException){
     //   console.log("Inside Catch")
     //   return {code: HttpStatus.NOT_FOUND, message:"Data Not Found"};

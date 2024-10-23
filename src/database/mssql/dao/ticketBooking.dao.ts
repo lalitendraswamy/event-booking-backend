@@ -5,6 +5,7 @@ import { Event } from "../models/events.model";
 import { handleSequelizeErrors } from "src/modules/utilis/tryCatchHandler";
 import { Sequelize } from "sequelize-typescript";
 import { messages } from "src/core/shared/responseMessages";
+import { User } from "../models/user.model";
 
 
 
@@ -16,6 +17,7 @@ export class BookingDao{
     constructor(
         @InjectModel(TicketBooking) private readonly bookingModel: typeof TicketBooking,
         @InjectModel(Event) private readonly eventsModel: typeof Event,
+        @InjectModel(User) private readonly usersModel: typeof User,
         private readonly sequelize: Sequelize
 ){}
 
@@ -28,10 +30,17 @@ export class BookingDao{
       const transaction = await this.sequelize.transaction();
       try {
       const event = await this.eventsModel.findByPk(bookingData.eventId, { transaction });
+    //   console.log("event in booking", event)
       if (!event) {
         // throw new Error('Event not found');
-        return {statusCode:HttpStatus.NOT_FOUND, message: messages.eventFound+ " while Booking"};
+        return {statusCode:HttpStatus.NOT_FOUND, message: messages.notFoundEvent+ " while Booking"};
       }
+
+      const user = await this.usersModel.findByPk(bookingData.userId);
+      if(!user){
+        return {statusCode:HttpStatus.NOT_FOUND, message:messages.notFoundUser+ " while Booking"};
+      }
+
       if (event.totalTickets < bookingData.numberOfTickets) {
         // throw new Error('Not enough tickets available');
         return {statusCode:HttpStatus.BAD_REQUEST,message:"Number of Tickets must be less than Total Tickets"}

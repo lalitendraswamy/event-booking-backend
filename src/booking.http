@@ -8,7 +8,7 @@ Content-Type: application/json
 {
     "numberOfTickets": "3",
     "eventId": "14dd3d02-667d-482e-9634-bdfeeeb499b4",
-    "userId": "be716b55-8afd-4122-8121-213afc9517ac"
+    "userId": "7b2ee40c-2b8d-42a3-b4bb-33b1db1c1aa9"
 }
 
 
@@ -18,4 +18,4 @@ GET http://localhost:5000/ticket-booking/be716b55-8afd-4122-8121-213afc9517ac
 
 
 ###
-DELETE http://localhost:5000/ticket-booking/remove/3399624d-91bd-4db3-aa55-1bb47ebe286d
+DELETE http://localhost:5000/ticket-booking/remove/b4bbca71-60c8-4205-806d-bd29393aa472

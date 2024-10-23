@@ -22,9 +22,6 @@ export class TicketBooking extends Model<TicketBooking> {
   })
   numberOfTickets: number;
 
-
-  
-
   @Column({
     type: DataType.ENUM(...Object.values(bookingStatus)),
     allowNull: false,

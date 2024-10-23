@@ -5,6 +5,7 @@ import { Role } from 'src/core/enums/roles.enum';
 import { EmailService } from 'src/modules/emailService/email.service';
 import { handleSequelizeErrors } from 'src/modules/utilis/tryCatchHandler';
 import { messages } from 'src/core/shared/responseMessages';
+import { CreateUserDto } from 'src/modules/users/dto/userPost.dto';
 
 
 @Injectable()
@@ -12,14 +13,14 @@ export class UserDao {
   private readonly logger = new Logger(UserDao.name)
   constructor(@InjectModel(User) private readonly userModel: typeof User, private readonly emailService: EmailService) { }
 
-  async createUser(user){
+  async createUser(user:CreateUserDto){
     return handleSequelizeErrors(async () => {
       this.logger.log("User Creating in Dao")
       const response =  await this.userModel.create(user);
       await this.emailService.sendInvitationEmail(user.email, "http://localhost:3000/login");
       // console.log(response);
   
-      return {statusCode :HttpStatus.CREATED, message: messages.postUser , data:response}
+      return {statusCode :HttpStatus.CREATED, message: messages.postUser}
     });
   }
 

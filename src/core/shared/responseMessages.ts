@@ -15,7 +15,8 @@ export const messages ={
     deleteUser: "User Deleted Successfully",
 
     // Events
-
+    postEvent: "Event Created Successfully",
+    filteredEventsFound:"List Of Filtered Events Found Successfully",
     eventsFound: "List of Events Found Successfully",
     notFoundEvents: "List of Events Not Found",
 

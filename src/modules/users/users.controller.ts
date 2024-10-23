@@ -6,8 +6,9 @@ import { Role } from 'src/core/enums/roles.enum';
 import { RoleGuard } from '../auth/role.guard';
 import { Roles } from '../auth/role.decorator';
 import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth,ApiBody,ApiExcludeEndpoint} from '@nestjs/swagger';
-import {CreateUserDto} from "./dto/user";
+import {CreateUserDto} from "./dto/userPost.dto";
 import { MyLogger } from 'src/core/logger/logger.service';
+import { UpdateUserDto } from './dto/userPut.dto';
 
 
 @ApiTags("users")
@@ -76,7 +77,7 @@ export class UsersController {
     @UseGuards(JwtAuthGuard,RoleGuard)
     @Roles(Role.admin)
     @Put("update/:id")
-    async updateUserById(@Param("id") id:string, @Body() body:Partial<User> ){
+    async updateUserById(@Param("id") id:string, @Body() body:UpdateUserDto ){
         this.logger.log("handle Update user by Id request in Controller");
         return await this.userService.updateUserById(id,body)
     }
