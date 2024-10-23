@@ -10,9 +10,8 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "username":"lalitendra",
-    "email":"lalitendra.swamy@g7cr.com",
-    "userImageUrl":"https://avatars.githubusercontent.com/u/120158122?v=4",
+    "username":"prasanna",
+    "email":"vijaya.lakshmi@g7cr.com",
     "role":"admin"
 
 

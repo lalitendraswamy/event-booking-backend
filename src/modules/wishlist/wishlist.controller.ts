@@ -23,7 +23,7 @@ export class WishlistController {
     }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @ApiBody({description:"data added successlu", type:CreateWishListDto})
     @ApiOperation({summary:"Add Wishlist Data"})
     @ApiResponse({status:200, description:"wishlist added"})

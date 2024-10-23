@@ -13,7 +13,8 @@ export class AuthController {
   async getAuthUrl(){
     return await this.authService.getAuthUrl()
   }
-
+ 
+  
   @ApiExcludeEndpoint()
   @Post('callback')
   async handleCallback(@Body('code') code: string) {
