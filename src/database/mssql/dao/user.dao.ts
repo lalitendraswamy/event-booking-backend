@@ -16,6 +16,7 @@ export class UserDao {
     return handleSequelizeErrors(async () => {
       this.logger.log("User Creating in Dao")
       const response =  await this.userModel.create(user);
+      console.log(response)
       await this.emailService.sendInvitationEmail(user.email, "http://localhost:3000/login");
       // console.log(response);
   

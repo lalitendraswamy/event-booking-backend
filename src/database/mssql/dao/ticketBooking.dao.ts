@@ -115,7 +115,7 @@ export class BookingDao{
 
             const deleteBooking = await this.bookingModel.destroy({where:{bookingId},transaction})
             await transaction.commit();
-            return {statusCode: HttpStatus.OK,message:"Booking Deleted Successfully" }
+            return {statusCode: HttpStatus.NO_CONTENT,message:"Booking Deleted Successfully" }
         }catch(err){
             await transaction.rollback();
             throw err;

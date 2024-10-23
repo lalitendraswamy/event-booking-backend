@@ -6,13 +6,13 @@ GET http://10.0.0.72:5000/users
 ###
 
 POST http://localhost:5000/users
-//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNDg0YTJhYi1lOTIzLTQyM2MtOGM3YS01ZGU4NWRjODUxOTMiLCJ1c2VybmFtZSI6IkJlbm55IiwidXNlckltYWdlVXJsIjpudWxsLCJlbWFpbCI6ImpvaG4uYmVubnlAZzdjci5jb20iLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjUxOjE0LjcwOFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTE0VDEyOjU4OjU3LjQwOFoiLCJpYXQiOjE3Mjg5MTEzOTcsImV4cCI6MTcyODkxNDk5N30.YSnvOoD-Tyhmx6VRMEJt1oMaUd1wSJCUr_onyMGkcYk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWFlNDRhMS01MTVmLTQ3OTctYjJkNy1lNDVkMjAzZGI0MTIiLCJ1c2VybmFtZSI6ImxhbGl0ZW5kcmEiLCJ1c2VySW1hZ2VVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMTIwMTU4MTIyP3Y9NCIsImVtYWlsIjoibGFsaXRlbmRyYS5zd2FteUBnN2NyLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyOTUyOTk4NCwiZXhwIjoxNzI5Nzg5MTg0fQ.JzqtCBLOpIIZWuCBuLSKKetNZEG00w1RUjGfSBCnn08
 Content-Type: application/json
 
 {
-    "username":"Benny",
-    "email":"john.benny@g7cr.com",
-    "role":"admin"
+    "username":"Lalitendra",
+    "email":"lalitendra.swamy@g7cr.com",
+    "role":"admin" 
 }
 
 ### Get User By UUID

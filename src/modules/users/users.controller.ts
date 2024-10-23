@@ -8,7 +8,7 @@ import { Roles } from '../auth/role.decorator';
 import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth,ApiBody,ApiExcludeEndpoint} from '@nestjs/swagger';
 import {CreateUserDto} from "./dto/user";
 import { MyLogger } from 'src/core/logger/logger.service';
-
+ 
 
 @ApiTags("users")
 @Controller('users')
@@ -19,8 +19,8 @@ export class UsersController {
     @ApiBearerAuth() 
     @ApiBody({ description: 'User data to create', type: CreateUserDto })
     @ApiResponse({ status: 201, description: 'User created successfully.' })
-    // @UseGuards(JwtAuthGuard,RoleGuard)
-    // @Roles(Role.admin)
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @Roles(Role.admin)
     @Post()
     async create(@Body() body: CreateUserDto) {
         this.logger.log("Handling Post request in User Controller")

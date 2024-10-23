@@ -102,7 +102,7 @@ export class EventsController {
     @Query('maxTicketPrice') maxTicketPrice: number,
     @Query('location') location: string,
     @Query('page') page: number = 1, 
-  ): Promise<{ events: Event[], totalItems: number }> {
+  ) {
     const filters = {
       category,
       eventDateTime,
@@ -112,7 +112,7 @@ export class EventsController {
       page: Number(page),  
     };
     
-    return this.eventsService.getFilteredEvents(filters);
+    return await this.eventsService.getFilteredEvents(filters);
   }
 
 }

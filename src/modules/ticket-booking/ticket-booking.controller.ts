@@ -7,7 +7,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 import { AppService } from '../app/app.service';
 
 @Controller('ticket-booking')
-export class TicketBookingController {
+export class TicketBookingController { 
     private stripe: Stripe;
 
     constructor(private readonly bookingService: TicketBookingService,private readonly appService:AppService,) {

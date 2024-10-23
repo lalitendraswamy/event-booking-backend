@@ -148,7 +148,7 @@ export class EventsDao{
         maxTicketPrice?: number;
         location?: string;
         page?: number; 
-      }): Promise<{ events: Event[], totalItems: number }> {
+      }) {
         const { category, eventDateTime, minTicketPrice, maxTicketPrice, location, page = 1 } = filters;
     
         const whereConditions: any = {};
@@ -197,9 +197,9 @@ export class EventsDao{
         });
     
         
-        return {
+        return {statusCode:HttpStatus.OK,message:"Filtered List of Events Found Successfully", data: {
           events,
           totalItems,
-        };
+        }};
       }
 }
