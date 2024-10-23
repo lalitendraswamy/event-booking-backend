@@ -40,8 +40,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()  
     async findAll(){

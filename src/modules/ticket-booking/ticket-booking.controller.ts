@@ -110,7 +110,7 @@ export class TicketBookingController {
                 userId
             })
             console.error("Error creating checkout session:", error);
-            throw new BadRequestException("Invalid request parameters"); // You can customize this message
+            throw new BadRequestException("Invalid request parameters"); 
         }
     }
 
