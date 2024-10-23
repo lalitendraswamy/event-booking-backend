@@ -172,8 +172,12 @@ export class EventsDao{
     
         
         if (eventDateTime) {
-          const date = new Date(eventDateTime);
-          whereConditions.eventDateTime = { [Op.eq]: date };
+          const startDate = new Date(eventDateTime);
+          const endDate = new Date(eventDateTime);
+
+            endDate.setHours(23,59,59,999);
+
+          whereConditions.eventDateTime = { [Op.between]: [startDate,endDate] };
         }
     
         
@@ -216,7 +220,7 @@ export class EventsDao{
         return {
           statusCode:HttpStatus.OK, 
           message:messages.filteredEventsFound, 
-          data:{events,totalItems,}};
+          data:{events,totalItems}};
       
       })
 }
