@@ -6,6 +6,8 @@ import { EmailService } from 'src/modules/emailService/email.service';
 import { handleSequelizeErrors } from 'src/modules/utilis/tryCatchHandler';
 import { messages } from 'src/core/shared/responseMessages';
 import { CreateUserDto } from 'src/modules/users/dto/userPost.dto';
+import { Op } from 'sequelize';
+
 
 
 @Injectable()
@@ -66,9 +68,19 @@ export class UserDao {
   }
 
 
-  async findUserByName(username: string): Promise<User> {
-    return await this.userModel.findOne({
-      where: { username: username }
+  async findUserByName(username: string){
+    // return await this.userModel.findOne({
+    //   where: { username: {[Op.like] : `%${username}%`} }
+    // })
+    return handleSequelizeErrors(async () =>{
+      const user = await this.userModel.findOne({
+          where: { username: {[Op.like] : `%${username}%`} }
+        })
+        if(!user){
+          return {statusCode :HttpStatus.NOT_FOUND, message:messages.notFoundUser+ " while searching by Username"}; 
+        }
+
+        return {statusCode:HttpStatus.OK,message:messages.userFound,data:user};
     })
   }
 

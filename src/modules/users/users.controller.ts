@@ -40,8 +40,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @ApiOperation({ summary: 'Get all users' })
     @Get()  
     async findAll(){
@@ -59,8 +59,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Get("username/:username")
     async findUserByName(@Param("username") username:string){
         return await this.userService.findUserByName(username);
@@ -83,8 +83,8 @@ export class UsersController {
     }
 
     @ApiBearerAuth() 
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Delete("remove/:id")
     async deleteUserById(@Param("id") id:string){
         this.logger.log("handle delete User By Id request in Controller");

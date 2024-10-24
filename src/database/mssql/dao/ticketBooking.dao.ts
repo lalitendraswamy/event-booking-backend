@@ -84,8 +84,30 @@ export class BookingDao{
         })
     }
 
-    async updateBookingById(id:string, bookingData:UpdateBookingDto){
-        return await this.bookingModel.update(bookingData, {where:{bookingId:id}});
+    async updateBookingById(bookingId:string, bookingData:UpdateBookingDto){
+        // return await this.bookingModel.update(bookingData, {where:{bookingId:id}});
+        const transaction = await this.sequelize.transaction();
+        try{
+            // console.log("Booking Id in Dao",bookingId);
+            // await this.bookingModel.sync({ alter: true });
+            const booking = await this.bookingModel.findOne({where:{bookingId}, transaction});
+            // console.log("Bookingggg", booking)
+            if(!booking){
+                return {statusCode:HttpStatus.NOT_FOUND, message:"Booking is not Avaliable"};
+            }
+
+            const event  = await this.eventsModel.findByPk(booking.eventId, {transaction});
+            event.totalTickets += booking.numberOfTickets;
+            await event.save({transaction});
+
+            const updateBooking = await this.bookingModel.update(bookingData,{where:{bookingId},transaction})
+            await transaction.commit();
+            return {statusCode: HttpStatus.OK,message:"Booking Deleted Successfully" }
+        }catch(err){
+            await transaction.rollback();
+            throw err;
+        }
+    
     }
 
     async getOrdersByUserId(id:string){
@@ -94,7 +116,8 @@ export class BookingDao{
         const userOrders =  await this.bookingModel.findAll({where:{userId:id},
             include:[{
                 model:Event
-            }]
+            }],
+            order: [['createdAt', 'DESC']]
         });
 
         if(userOrders.length===0){
