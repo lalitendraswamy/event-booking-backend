@@ -12,7 +12,7 @@ import { UpdateUserDto } from './dto/userPut.dto';
 
 
 @ApiTags("users")
-@Controller('users')
+@Controller('users') 
 export class UsersController {
     // private readonly logger = new Logger(UsersController.name);
     constructor(private readonly userService:UsersService,private readonly logger: MyLogger){}
