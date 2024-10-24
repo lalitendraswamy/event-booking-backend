@@ -78,7 +78,7 @@ export class EventsDao {
       const updatedEvent = await this.eventsModel.update(eventData, {
         where: { eventId: id }
       });
-
+      console.log("updatedEvent",updatedEvent);
       return { statusCode: HttpStatus.NO_CONTENT, message: messages.updateEvent };;
     })
   }

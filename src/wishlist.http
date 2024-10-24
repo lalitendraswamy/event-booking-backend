@@ -1,13 +1,13 @@
 
-GET http://localhost:5000/wishlist/be716b55-8afd-4122-8121-213afc9517ac
+GET http://localhost:5000/wishlist/c58e6a6c-debe-4487-bed4-763801002bbb
 
 ###
 POST http://localhost:5000/wishlist
 Content-Type: application/json
 
 {
-    "userId":"be716b55-8afd-4122-8121-213afc9517ac",
-    "eventId":"14dd3d02-667d-482e-9634-bdfeeeb499b4"
+    "userId":"c58e6a6c-debe-4487-bed4-763801002bbb",
+    "eventId":"224cedec-50f9-4689-8326-ee772c515b7c"
 }
 
 ###

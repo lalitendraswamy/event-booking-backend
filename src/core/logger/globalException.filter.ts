@@ -28,14 +28,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       method: request.method,
     };
  
-    // Log the error using the AppLogger
+    
     this.appLogger.logError(message, status, {
       path: request.url,
       method: request.method,
       body: request.body,
     });
  
-    // Send the error response to the client
+    
     response.status(status).json(errorResponse);
   }
 }
