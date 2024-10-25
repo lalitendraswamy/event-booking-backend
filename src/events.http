@@ -5,7 +5,7 @@ GET http://localhost:5000/events
 GET http://localhost:5000/events/get/892c2516-0b03-403d-8c4a-1e153d328e55
 
 
-###
+###   
 POST http://localhost:5000/events/multiple
 Content-Type: application/json
 
@@ -221,7 +221,7 @@ Content-Type: application/json
 
 ### Update Event by ID
 
-PUT http://localhost:5000/events/update/465db400-cc64-4cfd-9f90-5d56cd8c464f
+PUT http://localhost:5000/events/update/e2fe7b3a-d73b-448e-afac-ab0991e9e5ce
 Content-Type: application/json
 
 {

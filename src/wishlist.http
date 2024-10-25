@@ -6,8 +6,8 @@ POST http://localhost:5000/wishlist
 Content-Type: application/json
 
 {
-    "userId":"ab821db8-0997-48f9-9f48-a9b9d4f28a7e",
-    "eventId":"2247de88-be4f-4f97-854f-52d0fd5c42fe"
+    "userId":"de4cea08-bdee-45cb-b00e-b6038e23d36e",
+    "eventId":"0516b1af-840e-40e1-bc39-a8c6561cf2a0"
 }
 
 ###

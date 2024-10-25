@@ -52,8 +52,8 @@ export class EventsController {
 
     @ApiBearerAuth()
     @ApiBody({description:"Event added",type:CreateEventDto})
-    @UseGuards(JwtAuthGuard,RoleGuard)
-    @Roles(Role.admin)
+    // @UseGuards(JwtAuthGuard,RoleGuard)
+    // @Roles(Role.admin)
     @Put("update/:id")
     async updateEventById(@Param('id') id:string, @Body() body:Partial<Event>){
         this.logger.log("Handling Updating a Event by Id Request in Events Controller")

@@ -6,7 +6,7 @@ import { bookingStatus } from 'src/core/enums/bookingStatus.enum';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard.guard';
 import { AppService } from '../app/app.service';
 
-@Controller('ticket-booking')
+@Controller('ticket-booking') 
 export class TicketBookingController { 
     private stripe: Stripe;
 
@@ -28,7 +28,7 @@ export class TicketBookingController {
     }
 
     // @UseGuards(JwtAuthGuard)
-    @Get(":id")
+    @Get(":id") 
     async getOrdersByUserId(@Param("id") id:string){
         
         return await this.bookingService.getOrdersByUserId(id);
@@ -51,7 +51,7 @@ export class TicketBookingController {
 async createPaymentIntent(@Body() body: any) {
     
     const { ticketPrice, numberOfTickets , eventId, imageUrl, eventName, location, category, userId,} = body;
-
+ 
     const lineItems = [{
         price_data: {
             currency: "inr",
